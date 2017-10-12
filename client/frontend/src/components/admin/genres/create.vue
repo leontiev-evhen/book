@@ -1,5 +1,5 @@
 <template>
-  	<div class="author">
+  	<div class="create">
 	  	<h3 class="my-4">Create Genre</h3>
 		<form @submit.prevent="create">
 			<div class="form-group">
@@ -15,7 +15,7 @@
 <script>
 
 export default {
-  	name: 'author',
+  	name: 'create',
  	 data() {
 		return {
       		name: ''

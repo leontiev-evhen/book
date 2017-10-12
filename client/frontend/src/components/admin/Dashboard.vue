@@ -39,7 +39,7 @@
 			      			<a href="#/admin/customers" >
 				        		<i class="fa fa-users" aria-hidden="true"></i> Customers
 				        	</a>
-							<a href="#/admin/user/create" class="btn btn-primary btn_add">
+							<a href="#/admin/customer/create" class="btn btn-primary btn_add">
   								<i class="fa fa-plus" aria-hidden="true"></i>
   							</a>
 			      		</div>

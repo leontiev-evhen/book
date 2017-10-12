@@ -1,5 +1,5 @@
 <template>
-  	<div class="author">
+  	<div class="edit">
 	  	<h3 class="my-4">Edit Genre</h3>
 		<form @submit.prevent="edit">
 			<div class="form-group">

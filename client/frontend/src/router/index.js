@@ -21,6 +21,18 @@ import AdminGenres from '@/components/admin/genres/index'
 import GenreCreate from '@/components/admin/genres/create'
 import GenreEdit from '@/components/admin/genres/edit'
 
+/*admin books*/
+import AdminBooks from '@/components/admin/books/index'
+import BookCreate from '@/components/admin/books/create'
+import BookEdit from '@/components/admin/books/edit'
+
+/*admin customers*/
+import AdminCustomers from '@/components/admin/customers/index'
+import CustomerCreate from '@/components/admin/customers/create'
+import CustomerEdit from '@/components/admin/customers/edit'
+
+/*admin orders*/
+import AdminOrders from '@/components/admin/orders/index'
 
 /*end admin*/
 
@@ -81,7 +93,41 @@ export default new Router({
           name: 'GenreEdit',
           component: GenreEdit,
         },
-
+		{
+          path: '/admin/books',
+          name: 'AdminBooks',
+          component: AdminBooks,
+        },
+        {
+          path: '/admin/book/create',
+          name: 'BookCreate',
+          component: BookCreate,
+        },
+        {
+          path: '/admin/book/edit/:id',
+          name: 'BookEdit',
+          component: BookEdit,
+        },
+		{
+          path: '/admin/customers',
+          name: 'AdminCustomers',
+          component: AdminCustomers,
+        },
+        {
+          path: '/admin/customer/create',
+          name: 'CustomerCreate',
+          component: CustomerCreate,
+        },
+        {
+          path: '/admin/customer/edit/:id',
+          name: 'CustomerEdit',
+          component: CustomerEdit,
+        },
+		{
+          path: '/admin/orders',
+          name: 'AdminOrders',
+          component: AdminOrders,
+        },
         
       ]
     },
