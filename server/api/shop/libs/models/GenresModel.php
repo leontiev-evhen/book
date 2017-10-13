@@ -38,7 +38,7 @@ class GenresModel extends \core\Model
         $STH = $this->connect->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
         if ($STH->execute([':id' => $id]))
         {
-            return $STH->fetch();
+            return $STH->fetch(PDO::FETCH_ASSOC);
         }  
         return false;
     }

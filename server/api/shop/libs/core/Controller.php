@@ -41,25 +41,8 @@ class Controller
     {
     	header('HTTP/1.0 '.$code, $message);
         
-        if (!empty($data))
-        {
-            $data = $this->formattingArray($data);
-        }
-
     	return ['status' => $code, 'success' => $success, 'message' => $message, 'data' => $data];
     }
 
-    private function formattingArray ($data)
-    {
-        if (is_array($data[0]))
-        {
-            $array = function ($data) 
-            {
-                return array_unique($data);
-            };
 
-            return array_map($array, $data);
-        }
-        return array_unique($data);
-    }
 }
