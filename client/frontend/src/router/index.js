@@ -56,6 +56,11 @@ export default new Router({
           name: 'About',
           component: About
         },
+		{
+		  path: '/register',
+		  name: 'RegisterForm',
+		  component: RegisterForm
+		},
       ]
     },
     {
@@ -128,7 +133,6 @@ export default new Router({
           name: 'AdminOrders',
           component: AdminOrders,
         },
-        
       ]
     },
     {
@@ -136,11 +140,7 @@ export default new Router({
       name: 'Login',
       component: Login
     },
-    {
-      path: '/register',
-      name: 'RegisterForm',
-      component: RegisterForm
-    },
+
     {
       path: '/user',
       name: 'User',

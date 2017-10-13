@@ -4,7 +4,8 @@
 		<form @submit.prevent="create">
 			<div class="form-group">
 			    <label for="text">Name:</label>
-			    <input type="text" class="form-control" v-model="name">
+			    <p :class="{ 'control': true }"><input v-model="name" v-validate="'required|alpha'" :class="{'input form-control': true, 'is-danger': errors.has('name') }"type="text" name="name"></p>
+				<span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 			</div>
 			<div class="form-group">
 			    <label for="text">Description:</label>
@@ -12,7 +13,8 @@
 			</div>
 			<div class="form-group">
 			    <label for="text">Price:</label>
-			    <input type="text" class="form-control" v-model="price">
+				<p :class="{ 'control': true }"><input v-model="price" v-validate="'required|alpha'" :class="{'input form-control': true, 'is-danger': errors.has('price') }"type="text" name="price"></p>
+				<span v-show="errors.has('price')" class="help is-danger">{{ errors.first('price') }}</span>
 			</div>
 			<div class="form-group">
 			    <label for="text">Discaunt:</label>
@@ -39,30 +41,34 @@ export default {
   	},
  	methods: {
  		create: function() {
- 			let config = {
-			  	headers: {
-			    	'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
-			  	}
-			}
-	    
-			this.axios.post(this.$parent.$parent.AJAX_URL + '/book/client/api/books', {
-			    	name: this.name,
-					description: this.description,
-					price: +this.price,
-					discaunt: +this.discaunt,
-			    }, config)  
-			    .then((response) => {
+			this.$validator.validateAll().then((result) => {
+		        if (result) {
+					let config = {
+						headers: {
+							'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+						}
+					}
+				
+					this.axios.post(this.$parent.$parent.AJAX_URL + '/book/client/api/books', {
+							name: this.name,
+							description: this.description,
+							price: +this.price,
+							discaunt: +this.discaunt,
+						}, config)  
+						.then((response) => {
 
-			        if (response.status == 200) {
-			            if (!response.data.success) {
-			              	console.log(response.data.message)
-			            } else {
-			         		location.href = '#/admin/books'
-			            }
-			        } else {
-			            console.log(response.data.message)
-			        }
-		    	})
+							if (response.status == 200) {
+								if (!response.data.success) {
+									console.log(response.data.message)
+								} else {
+									location.href = '#/admin/books'
+								}
+							} else {
+								console.log(response.data.message)
+							}
+						})
+				}
+     		});
  		}
   	}
 }

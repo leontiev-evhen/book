@@ -1,7 +1,7 @@
 <template>
   	<div class="order">
   		
-	  	<h3 class="my-4">Books</h3>
+	  	<h3 class="my-4">Orders</h3>
 
   		<div class="list-group">
   			<table class="table table-hover">
@@ -32,7 +32,8 @@ export default {
   	name: 'index',
  	 data() {
 		return {
-      		orders: ''
+      		orders: '',
+			status: ''
 		}
   	},
  	methods: {

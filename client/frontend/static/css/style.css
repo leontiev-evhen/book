@@ -3,18 +3,31 @@
 }
 
 .auth_form {
-	width: 300px;
 	margin: 0 auto;
+	position: relative;
+    top: 16px;
 }
 
+.auth_form .form-group {
+	display:inline-block;
+}
+
+.my-4 {
+    margin-top: 3.5rem!important;
+}
 .is-danger {
 	color: red;
 	border-color: red; 
 }
 
+.register_link {
+	padding-left: 10px;
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s
 }
+
 .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
   opacity: 0
 }

@@ -4,7 +4,8 @@
 		<form @submit.prevent="create">
 			<div class="form-group">
 			    <label for="text">Name:</label>
-			    <input type="text" class="form-control" v-model="name">
+				<p :class="{ 'control': true }"><input v-model="name" v-validate="'required|alpha'" :class="{'input form-control': true, 'is-danger': errors.has('name') }"type="text" name="name"></p>
+				<span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 			</div>
 			<button type="submit" class="btn btn-default">Create</button>
 		</form>
@@ -23,27 +24,31 @@ export default {
   	},
  	methods: {
  		create: function() {
- 			let config = {
-			  	headers: {
-			    	'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
-			  	}
-			}
-	    
-			this.axios.post(this.$parent.$parent.AJAX_URL + '/book/client/api/authors', {
-			    	name: this.name
-			    }, config)  
-			    .then((response) => {
+			this.$validator.validateAll().then((result) => {
+		        if (result) {
+					let config = {
+						headers: {
+							'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+						}
+					}
+				
+					this.axios.post(this.$parent.$parent.AJAX_URL + '/book/client/api/authors', {
+							name: this.name
+						}, config)  
+						.then((response) => {
 
-			        if (response.status == 200) {
-			            if (!response.data.success) {
-			              	console.log(response.data.message)
-			            } else {
-			         		location.href = '#/admin/authors'
-			            }
-			        } else {
-			            console.log(response.data.message)
-			        }
-		    	})
+							if (response.status == 200) {
+								if (!response.data.success) {
+									console.log(response.data.message)
+								} else {
+									location.href = '#/admin/authors'
+								}
+							} else {
+								console.log(response.data.message)
+							}
+						})
+				}
+     		});
  		}
   	}
 }

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import AuthForm from './components/AuthForm.vue'
+
 export default {
   name: 'app',
   data() {
@@ -32,7 +32,7 @@ export default {
     this.user = JSON.parse(localStorage.getItem("profile"))
   },
   components: {
-    AuthForm
+    
   }
 }
 </script>

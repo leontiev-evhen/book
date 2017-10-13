@@ -1,6 +1,6 @@
 <template>
 	<div class="register_form col-md-6">
-		<h1>Registration</h1>
+		<h3 class="my-4">Registration</h3>
 		<p class="success_m" v-if="success">{{success}}</p>
 		<form v-else @submit.prevent="validForm">
 			<p v-if="error" class="is-danger">{{error}}</p>

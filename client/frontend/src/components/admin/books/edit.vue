@@ -6,7 +6,8 @@
 	            <form @submit.prevent="edit">
 					<div class="form-group">
 					    <label for="text">Name:</label>
-					    <input type="text" class="form-control" v-default-value="book.name" v-model="name">
+						<p :class="{ 'control': true }"><input v-model="name" v-validate="'required|alpha'" :class="{'input form-control': true, 'is-danger': errors.has('name') }"type="text" name="name" v-default-value="book.name"></p>
+						<span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 					</div>
 					<div class="form-group">
 					    <label for="text">Description:</label>
@@ -14,7 +15,7 @@
 					</div>
 					<div class="form-group">
 					    <label for="text">Price:</label>
-					    <input type="text" class="form-control" v-default-value="book.price" v-model="price">
+						<p :class="{ 'control': true }"><input v-model="price" v-validate="'required|alpha'" :class="{'input form-control': true, 'is-danger': errors.has('price') } "type="text" name="price" v-default-value="book.price"></p>
 					</div>
 					<div class="form-group">
 					    <label for="text">Discaunt:</label>
@@ -89,7 +90,7 @@ export default {
  	methods: {
 
  		saveAuthor: function () {
-
+			
 			this.axios.post(this.$parent.$parent.AJAX_URL + '/book/client/api/books/' + this.$route.params.id + '/author', {
 					ids: this.info_author
 				}, this.config)  
@@ -133,25 +134,28 @@ export default {
     	},
 
  		edit: function() {
-	    
-			this.axios.put(this.$parent.$parent.AJAX_URL + '/book/client/api/books/' + this.$route.params.id, {
-			    	name: (this.name) ? this.name : this.book.name,
-			    	description: (this.description) ? this.description : this.book.description,
-			    	price: (this.price) ? +this.price : +this.book.price,
-			    	discaunt: (this.discaunt) ? +this.discaunt : +this.book.discaunt,
-			    }, this.config)  
-			    .then((response) => {
+			this.$validator.validateAll().then((result) => {
+		        if (result) {
+					this.axios.put(this.$parent.$parent.AJAX_URL + '/book/client/api/books/' + this.$route.params.id, {
+							name: (this.name) ? this.name : this.book.name,
+							description: (this.description) ? this.description : this.book.description,
+							price: (this.price) ? +this.price : +this.book.price,
+							discaunt: (this.discaunt) ? +this.discaunt : +this.book.discaunt,
+						}, this.config)  
+						.then((response) => {
 
-			        if (response.status == 200) {
-			            if (!response.data.success) {
-			              	console.log(response.data.message)
-			            } else {
-			         		location.href = '#/admin/books'
-			            }
-			        } else {
-			            console.log(response.data.message)
-			        }
-		    	})
+							if (response.status == 200) {
+								if (!response.data.success) {
+									console.log(response.data.message)
+								} else {
+									location.href = '#/admin/books'
+								}
+							} else {
+								console.log(response.data.message)
+							}
+						})
+				}
+     		});
  		}
   	},
     created() {

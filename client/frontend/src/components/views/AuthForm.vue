@@ -1,26 +1,28 @@
 <template>
-	<div class="auth_form" v-if="!access">
-		<form @submit.prevent="validForm">
-			<p v-if="error" class="is-danger">{{error}}</p>
-			<p :class="{ 'control': true }"><input v-model="email" v-validate="'required|email'" :class="{'input form-control': true, 'is-danger': errors.has('email') }" type="text" name="email" placeholder="Email"></p>
-			<span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
-
-			<p :class="{ 'control': true }"><input v-model="password" v-validate="'required'" :class="{'input form-control': true, 'is-danger': errors.has('password') }"type="password" name="password" placeholder="Password"></p>
-			<span v-show="errors.has('password')" class="help is-danger">{{ errors.first('password') }}</span>
-			
-			<p><button type="submit" class="btn btn-primary">Submit</button>
-			<a class="register_link" href="#/register">Register</a></p>
-		</form>
-	</div>
-	<div class="user_block" v-else>
-		<span class="glyphicon glyphicon-user"></span> Hello <a href="#/user">{{this.$parent.user.name}}</a>
-		<p class="logout"><a href="#" @click="logout">Logout</a></p>
+	<div>
+		<div class="auth_form" v-if="!access">
+			<form @submit.prevent="validForm" class="navbar-form navbar-left">
+				<p v-if="error" class="is-danger">{{error}}</p>
+				<div class="form-group">
+					<p :class="{ 'control': true }"><input v-model="email" v-validate="'required|email'" :class="{'input form-control': true, 'is-danger': errors.has('email') }" type="text" name="email" placeholder="Email"></p>
+				</div>
+				<div class="form-group">
+					<p :class="{ 'control': true }"><input v-model="password" v-validate="'required'" :class="{'input form-control': true, 'is-danger': errors.has('password') }"type="password" name="password" placeholder="Password"></p>
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+				<a class="register_link" href="#/register">Register</a>
+			</form>
+		</div>
+		<div class="user_block" v-else>
+			<span class="glyphicon glyphicon-user"></span> Hello <a href="#/user">{{this.$parent.user.name}}</a>
+			<p class="logout"><a href="#" @click="logout">Logout</a></p>
+		</div>
 	</div>
 </template>
 
 <script>
 	export default {
-  	name: 'PreOrderForm',
+  	name: 'AuthForm',
   	data() {
   		return {
 			email: '',

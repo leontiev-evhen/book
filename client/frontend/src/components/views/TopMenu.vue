@@ -14,16 +14,26 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Services</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="#/about">About</a>
             </li>
           </ul>
+		  <auth-form></auth-form>
         </div>
+		
       </div>
     </nav>
-</tempalte>
+</template>
+
+<script>
+import AuthForm from './AuthForm.vue'
+export default {
+  name: 'TopMenu',
+  components: {
+	AuthForm
+  }
+}
+</script>
+
+<style>
+
+</style>
