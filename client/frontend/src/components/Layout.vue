@@ -1,5 +1,5 @@
 <template>
-  	<div class="home">
+  	<div class="main">
 	 	<top-menu  @login="login" @logout="logout"></top-menu>
 	    <div class="container">
 

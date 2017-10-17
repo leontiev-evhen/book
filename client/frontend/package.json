@@ -1,7 +1,7 @@
 {
-  "name": "auto_shop",
+  "name": "book",
   "version": "1.0.0",
-  "description": "soap client",
+  "description": "book shop",
   "author": "Yevhen <leontevevgenii@gmail.com>",
   "private": true,
   "scripts": {
