@@ -9,15 +9,15 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home
+              <a class="nav-link" href="/">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#/about">About</a>
+              <a class="nav-link" href="/about">About</a>
             </li>
           </ul>
-		  <auth-form></auth-form>
+		      <auth-form @login="login" @logout="logout"></auth-form>
         </div>
 		
       </div>
@@ -29,7 +29,15 @@ import AuthForm from './AuthForm.vue'
 export default {
   name: 'TopMenu',
   components: {
-	AuthForm
+	   AuthForm
+  },
+  methods: {
+      login: function() {
+        this.$emit('login')
+      },
+      logout: function() {
+          this.$emit('logout')
+      }
   }
 }
 </script>

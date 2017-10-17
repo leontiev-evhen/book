@@ -11,97 +11,61 @@ class CustomersController extends \core\Controller
 
     protected $rules = [
         'name'      => 'string',
-        'surname'   => 'string',
         'email'     => 'string',
         'password'  => 'string',
+        'discaunt'  => 'integer',
+        'status'    => 'integer',
     ];
 
-    public function __construct ()
+    public function __construct ($params)
     {
-        $this->model = new \models\UsersModel();
-        $this->orders_model = new \models\OrdersModel();
+        $this->model = new \models\CustomersModel();
 
         $this->headers = getallheaders();
-    }
 
-    public function getUsers ($params = false) 
-    {
-        if (!empty($params)) 
+        if ($params)
         {
             $param = explode('/', $params);
-            $id = (int)$param[0];
-            $value = $param[1];
-            $aData = null;
-         
-            if ($this->checkAuthUser($id, $this->headers['Authorization']))
-            {
-                switch ($value) 
-                {
-                    case 'orders':
-                        $aData = $this->orders_model->getUserOrders($id);
-                        break;
-                    
-                    default:
-                        return $this->getServerAnswer(400, false, 'Bad Request');
-                        break;
-                }
-
-                if ($aData)
-                {
-                    return $this->getServerAnswer(200, true, 'orders received successfully', $aData);
-                }
-                else
-                {
-                    return $this->getServerAnswer(200, true, 'Don\'t found orders');
-                }
-            }
-            else
-            {
-                return $this->getServerAnswer(200, false, 'authentication false');
-            }
+            $this->id = (int)$param[0];
         }
-        return $this->getServerAnswer(400, false, 'Bad Request');
     }
 
-    public function putUsers ($id = false) 
+    public function getCustomers ()
+    {
+        if (!empty($this->id))
+        {       
+            return $this->getCustomerById();
+        }
+
+        $data = $this->model->getAllCustomers();
+        if (!empty($data))
+        {
+            return $this->getServerAnswer(200, true, 'customers successfully received', $data);
+        }
+        return $this->getServerAnswer(500, false, 'Internal Server Error');
+    }
+
+    public function getCustomerById ()
+    {
+        $data = $this->model->getOneCustomer($this->id);
+        if (!empty($data))
+        {
+            return $this->getServerAnswer(200, true, 'genre successfully received', $data);
+        }
+        else
+        {
+            return $this->getServerAnswer(500, false, 'Internal Server Error');
+        }
+    }
+
+    public function postCustomers () 
     {
         if ($this->validate()) 
         {
-
-            $password =  base64_decode($this->data->password);
-    
-            if ($aData = $this->model->checkUser($this->data))
-            {
-                if (password_verify($password, $aData['password'])) {
-
-                    $aData = array_unique($aData);
-                    unset($aData['password']);
-
-                    $aData['access_token'] = $this->createToken($aData['id']);
-
-                    return $this->getServerAnswer(200, true, 'user authentication successful', $aData);
-                } 
-                return $this->getServerAnswer(200, false, 'invalid email or password');
-            }
-            else
-            {
-                return $this->getServerAnswer(500, false, 'Internal Server Error');
-            }
-        }
-
-        return $this->getServerAnswer(400, false, 'Bad Request');
-    }
-
-
-    public function postUsers () 
-    {
-        if ($this->validate()) 
-        {
-
             $password =  base64_decode($this->data->password);
             $this->data->password = password_hash($password, PASSWORD_DEFAULT);
-            
-            $aData = $this->model->createUser($this->data);
+   
+            $aData = $this->model->createCustomer($this->data);
             if ($aData['result'])
             {
                 return $this->getServerAnswer(200, $aData['result'], $aData['message']);
@@ -115,32 +79,21 @@ class CustomersController extends \core\Controller
         return $this->getServerAnswer(400, false, 'Bad Request');
     }
 
-    private function checkAuthUser ($id, $access_token)
+    public function putCustomers ()
     {
-        return $this->model->checkAuthUser($id, $access_token);
-    }
-
-    private function createToken ($id) 
-    {
-        $data['access_token'] = $this->getToken();
-        $data['id'] = $id;
-        $this->model->updateToken($data);
-        return $data['access_token'];
-    }
-
-    private function getToken()
-    {
-        $token = "";
-        $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        $codeAlphabet.= "abcdefghijklmnopqrstuvwxyz";
-        $codeAlphabet.= "0123456789";
-        $max = strlen($codeAlphabet);
-
-        for ($i = 0; $i < 32; $i++) 
+        if ($this->validate() && $this->id) 
         {
-            $token .= $codeAlphabet[random_int(0, $max-1)];
+            if ($this->model->updateCustomer($this->data, $this->id))
+            {
+                return $this->getServerAnswer(200, true, 'genre update successful');
+            }
+            else
+            {
+                return $this->getServerAnswer(200, false, 'some error');
+            }
         }
 
-        return $token;
+        return $this->getServerAnswer(400, false, 'Bad Request');
     }
+
 }

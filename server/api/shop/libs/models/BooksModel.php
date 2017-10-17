@@ -199,4 +199,25 @@ class BooksModel extends \core\Model
         
     }
 
+    public function BooksCategory ($relation, $id)
+    {
+        $sql = $this->select([
+                'books.id',
+                'books.name',
+                'books.description',
+                'books.price',
+                'books.discaunt'])
+            ->from($this->table)
+            ->join('left', 'book2'.$relation.' ON book2'.$relation.'.id_book = books.id')
+            ->where(['id_'.$relation => "<:id>"])
+             ->execute();
+        $sql = str_replace(["'<", ">'"], '', $sql);
+
+        $STH = $this->connect->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        if ($STH->execute([':id' => $id]))
+        {
+            return $STH->fetchAll();
+        }
+    }
+
 }

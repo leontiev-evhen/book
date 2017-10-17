@@ -7,9 +7,6 @@
 			<p :class="{ 'control': true }"><input v-model="name" v-validate="'required|alpha'" :class="{'input form-control': true, 'is-danger': errors.has('name') }"type="text" name="name" placeholder="Name"></p>
 			<span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 
-			<p :class="{ 'control': true }"><input v-model="surname" v-validate="'required|alpha'" :class="{'input form-control': true, 'is-danger': errors.has('surname') }"type="text" name="surname" placeholder="Surname"></p>
-			<span v-show="errors.has('surname')" class="help is-danger">{{ errors.first('surname') }}</span>
-
 			<p :class="{ 'control': true }"><input v-model="email" v-validate="'required|email'" :class="{'input form-control': true, 'is-danger': errors.has('email') }" type="text" name="email" placeholder="Email"></p>
 			<span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
 
@@ -30,7 +27,6 @@
   	data() {
   		return {
   			name: '',
-  			surname: '',
 			email: '',
 			password: '',
 			repeat_password: '',
@@ -49,9 +45,8 @@
 					  }
 					}
 	    
-				    this.axios.post(this.$parent.AJAX_URL + '/rest/client/api/users', {
+				    this.axios.post(this.$parent.$parent.AJAX_URL + '/book/client/api/auth', {
 				    	name: this.name,
-				    	surname: this.surname,
 				    	email: this.email,
 				    	password: btoa(this.password)
 				    }, config)  

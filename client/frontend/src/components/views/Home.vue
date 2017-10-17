@@ -133,38 +133,7 @@
 <script>
 
 export default {
-  name: 'home',
-  data () {
-    return {
-      msg: 'Auto shop',
-      data: [],
-      auto: [],
-      filter_result: true
-    }
-  },
-  created() {
-    this.axios.get(this.$parent.AJAX_URL + '/rest/client/api/auto').then((response) => {
-
-          if (response.status == 200) {
-            if (response.data.status) {
-              this.auto = response.data.data
-              this.data = response.data.data
-            } else {
-              console.log(response.data.message)
-            }
-          } else {
-            console.log(response.data.message)
-          }
-    })
-  },
-  methods: {
-      getAuto: function() {
-          return this.auto
-      }
-  },
-  components:{
-  
-  }
+  name: 'home'
 }
 </script>
 

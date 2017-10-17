@@ -1,11 +1,9 @@
 <template>
 	<div>
 	<div class="user_info col-md-6">
-		<h2>User information</h2>
+		<h3 class="my-4">Hello {{this.$parent.$parent.user.name}}</h3>
 		<ul class="description">
-			<li><span class="glyphicon glyphicon-arrow-right"></span>Name: {{this.$parent.user.name}}</li>
-			<li><span class="glyphicon glyphicon-arrow-right"></span>Surname: {{this.$parent.user.surname}}</li>
-			<li><span class="glyphicon glyphicon-envelope"></span>{{this.$parent.user.email}}</li>
+			<li><span class="glyphicon glyphicon-envelope"></span>{{this.$parent.$parent.user.email}}</li>
 		</ul>
 	</div>
 	<div class="col-md-6">
@@ -38,21 +36,21 @@
   	},
   	created() {
   	
-  		if (!this.$parent.user) {
+  		if (!this.$parent.$parent.user) {
   			location.href = '/';
   		}
 
   		let instance = this.axios.create({
-  			baseURL: this.$parent.AJAX_URL
+  			baseURL: this.$parent.$parent.AJAX_URL
 		});
 
 		
   		let self = this
   	
 
-  		instance.defaults.headers.common['Authorization'] = this.$parent.user.access_token
+  		instance.defaults.headers.common['Authorization'] = this.$parent.$parent.user.access_token
 
-	    this.axios.get(this.$parent.AJAX_URL + '/rest/client/api/users/' + this.$parent.user.id + '/orders')  
+	    this.axios.get(this.$parent.$parent.AJAX_URL + '/book/client/api/customers/' + this.$parent.$parent.user.id + '/orders')  
     	.then(function (response) {
 		  	if (response.status == 200) {
 	            if (response.data.success) {

@@ -4,7 +4,7 @@
 		<form @submit.prevent="create">
 			<div class="form-group">
 			    <label for="text">Name:</label>
-			    <p :class="{ 'control': true }"><input v-model="name" v-validate="'required|alpha'" :class="{'input form-control': true, 'is-danger': errors.has('name') }"type="text" name="name"></p>
+			    <p :class="{ 'control': true }"><input v-model="name" v-validate="'required'" :class="{'input form-control': true, 'is-danger': errors.has('name') }"type="text" name="name"></p>
 				<span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 			</div>
 			<div class="form-group">
@@ -13,7 +13,7 @@
 			</div>
 			<div class="form-group">
 			    <label for="text">Price:</label>
-				<p :class="{ 'control': true }"><input v-model="price" v-validate="'required|alpha'" :class="{'input form-control': true, 'is-danger': errors.has('price') }"type="text" name="price"></p>
+				<p :class="{ 'control': true }"><input v-model="price" v-validate="'required|numeric'" :class="{'input form-control': true, 'is-danger': errors.has('price') }"type="text" name="price"></p>
 				<span v-show="errors.has('price')" class="help is-danger">{{ errors.first('price') }}</span>
 			</div>
 			<div class="form-group">
@@ -61,7 +61,7 @@ export default {
 								if (!response.data.success) {
 									console.log(response.data.message)
 								} else {
-									location.href = '#/admin/books'
+									location.href = '/admin/books'
 								}
 							} else {
 								console.log(response.data.message)

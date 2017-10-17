@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <router-view @login="login" @logout="logout"></router-view>
   </div>
 </template>
 
@@ -11,8 +11,8 @@ export default {
   data() {
     return {
       //AJAX_URL: 'http://192.168.0.15/~user11',
-      //assetUrl: 'http://192.168.0.15/~user11/rest/server/api/shop/assets/',
-      //assetAutoUrl: 'http://192.168.0.15/~user11/rest/server/api/shop/assets/auto/',
+      //assetUrl: 'http://192.168.0.15/~user11/book/server/api/shop/assets/',
+      //assetAutoUrl: 'http://192.168.0.15/~user11/book/server/api/shop/assets/auto/',
       AJAX_URL: 'http://courses.site',
       assetUrl: 'http://courses.site/book/server/api/shop/assets/',
       assetAutoUrl: 'http://courses.site/book/server/api/shop/assets/auto/',

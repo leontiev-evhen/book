@@ -1,8 +1,8 @@
 <template>
 	<div>
+		<p v-if="error" class="auth-danger">{{error}}</p>
 		<div class="auth_form" v-if="!access">
 			<form @submit.prevent="validForm" class="navbar-form navbar-left">
-				<p v-if="error" class="is-danger">{{error}}</p>
 				<div class="form-group">
 					<p :class="{ 'control': true }"><input v-model="email" v-validate="'required|email'" :class="{'input form-control': true, 'is-danger': errors.has('email') }" type="text" name="email" placeholder="Email"></p>
 				</div>
@@ -10,11 +10,12 @@
 					<p :class="{ 'control': true }"><input v-model="password" v-validate="'required'" :class="{'input form-control': true, 'is-danger': errors.has('password') }"type="password" name="password" placeholder="Password"></p>
 				</div>
 				<button type="submit" class="btn btn-primary">Submit</button>
-				<a class="register_link" href="#/register">Register</a>
+				<a class="register_link" href="/register">Register</a>
 			</form>
 		</div>
 		<div class="user_block" v-else>
-			<span class="glyphicon glyphicon-user"></span> Hello <a href="#/user">{{this.$parent.user.name}}</a>
+			<i class="fa fa-user-times" aria-hidden="true"></i>
+			<a href="/user">{{this.$parent.$parent.$parent.user.name}}</a>
 			<p class="logout"><a href="#" @click="logout">Logout</a></p>
 		</div>
 	</div>
@@ -35,6 +36,7 @@
   		validForm: function() {
   			var self = this
 			this.$validator.validateAll().then((result) => {
+			
 		        if (result) {
 		        	let config = {
 					  headers: {
@@ -42,7 +44,7 @@
 					  }
 					}
 	    
-				    this.axios.put(this.$parent.AJAX_URL + '/rest/client/api/users', {
+				    this.axios.put(this.$parent.$parent.$parent.AJAX_URL + '/book/client/api/auth', {
 				    	email: this.email,
 				    	password: btoa(this.password)
 				    }, config)  
@@ -52,7 +54,7 @@
 			            if (!response.data.success) {
 			              	self.error = response.data.message
 			            } else {
-			              	let profile = localStorage.setItem('profile', JSON.stringify(response.data.data));
+			              	localStorage.setItem('profile', JSON.stringify(response.data.data));
 			              	self.access = true
 			              	this.$emit('login')
 			            }
@@ -71,7 +73,8 @@
 		}
   	},
   	created() {
-  		if (this.$parent.user) {
+  		console.log(this.$parent.$parent.$parent)
+  		if (this.$parent.$parent.$parent.user) {
   			this.access = true
   		}
   		

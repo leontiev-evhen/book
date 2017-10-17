@@ -47,7 +47,7 @@ class RestServer
         }
     }
 
-    private function setMethod($class, $method, $param = false)
+    private function setMethod($class, $method)
     {
         if ( method_exists($class, $method) )
         {

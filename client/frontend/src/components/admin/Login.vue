@@ -1,7 +1,8 @@
 <template>
 	<div class="auth">
 		<h2>Login</h2>
-		<form  class="auth_form" @submit.prevent="validForm">
+		
+		<form  class="login_form" @submit.prevent="validForm">
 			<p v-if="error" class="is-danger">{{error}}</p>
 			<p :class="{ 'control': true }"><input v-model="email" v-validate="'required|email'" :class="{'input form-control': true, 'is-danger': errors.has('email') }" type="text" name="email" placeholder="Email"></p>
 			<span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
@@ -36,9 +37,10 @@
 					  }
 					}
 	    
-				    this.axios.put(this.$parent.AJAX_URL + '/rest/client/api/users', {
+				    this.axios.put(this.$parent.AJAX_URL + '/book/client/api/auth', {
 				    	email: this.email,
-				    	password: btoa(this.password)
+				    	password: btoa(this.password),
+				    	is_admin: 1
 				    }, config)  
 				    .then((response) => {
 
@@ -46,9 +48,8 @@
 			            if (!response.data.success) {
 			              	self.error = response.data.message
 			            } else {
-			              	let profile = localStorage.setItem('profile', JSON.stringify(response.data.data));
-			              	self.access = true
-			              	this.$emit('login')
+			              	localStorage.setItem('admin', JSON.stringify(response.data.data));
+			              	location.href = '/admin';
 			            }
 			          } else {
 			            	console.log(response.data.message)

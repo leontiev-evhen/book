@@ -7,6 +7,8 @@ class BooksController extends \core\Controller
 
     protected $model;
     private $id;
+    private $relation;
+    private $category_id;
     protected $rules = [
         'name'          => 'string',
         'description'   => 'string',
@@ -22,18 +24,27 @@ class BooksController extends \core\Controller
         if ($params)
         {
         	$param = explode('/', $params);
-    		$this->id = isset($param[0]) ?(int)$param[0] : null;
+    		$this->id = isset($param[0]) ? (int)$param[0] : null;
             $this->relation = isset($param[1]) ? (string)$param[1] : null;
+            $this->category_id = isset($param[2]) ? (int)$param[2] : null;
         }
     }
 
     public function getBooks ($params = false)
     {
+        /*get one book */
     	if (!empty($this->id))
     	{    	
     		return $this->getBookById();
     	}
 
+        /*get relation on the books of authors and genres*/
+        if (!empty($this->category_id))
+        {       
+            return $this->getBooksCategory($this->category_id);
+        }
+
+        /*gel all books*/
     	$data = $this->model->getAllBooks();
     	if (!empty($data))
     	{
@@ -42,6 +53,7 @@ class BooksController extends \core\Controller
     	return $this->getServerAnswer(500, false, 'Internal Server Error');
     }
 
+    /*get one book */
     public function getBookById ()
     {
  		$data = $this->model->getOneBook($this->id);
@@ -53,6 +65,20 @@ class BooksController extends \core\Controller
 		{
 			return $this->getServerAnswer(500, false, 'Internal Server Error');
 		}
+    }
+
+    /*get relation on the books of authors and genres*/
+    public function getBooksCategory ()
+    {
+        $data = $this->model->BooksCategory($this->relation, $this->category_id);
+        if (!empty($data))
+        {
+            return $this->getServerAnswer(200, true, 'book successfully received', $data);
+        }
+        else
+        {
+            return $this->getServerAnswer(500, false, 'Internal Server Error');
+        }
     }
 
     public function postBooks ()

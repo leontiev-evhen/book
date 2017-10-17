@@ -102,7 +102,6 @@ export default {
 		            } else {
 		            	this.success = ''
 		         		this.success = response.data.message
-		         		flash('Hello World', 'success');
 		            }
 		        } else {
 		            console.log(response.data.message)
@@ -134,28 +133,26 @@ export default {
     	},
 
  		edit: function() {
-			this.$validator.validateAll().then((result) => {
-		        if (result) {
-					this.axios.put(this.$parent.$parent.AJAX_URL + '/book/client/api/books/' + this.$route.params.id, {
-							name: (this.name) ? this.name : this.book.name,
-							description: (this.description) ? this.description : this.book.description,
-							price: (this.price) ? +this.price : +this.book.price,
-							discaunt: (this.discaunt) ? +this.discaunt : +this.book.discaunt,
-						}, this.config)  
-						.then((response) => {
+			
+			this.axios.put(this.$parent.$parent.AJAX_URL + '/book/client/api/books/' + this.$route.params.id, {
+					name: (this.name) ? this.name : this.book.name,
+					description: (this.description) ? this.description : this.book.description,
+					price: (this.price) ? +this.price : +this.book.price,
+					discaunt: (this.discaunt) ? +this.discaunt : +this.book.discaunt,
+				}, this.config)  
+				.then((response) => {
 
-							if (response.status == 200) {
-								if (!response.data.success) {
-									console.log(response.data.message)
-								} else {
-									location.href = '#/admin/books'
-								}
-							} else {
-								console.log(response.data.message)
-							}
-						})
-				}
-     		});
+					if (response.status == 200) {
+						if (!response.data.success) {
+							console.log(response.data.message)
+						} else {
+							location.href = '#/admin/books'
+						}
+					} else {
+						console.log(response.data.message)
+					}
+				})
+			
  		}
   	},
     created() {

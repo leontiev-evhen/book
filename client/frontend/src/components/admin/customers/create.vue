@@ -1,7 +1,8 @@
 <template>
   	<div class="create">
-	  	<h3 class="my-4">Create Genre</h3>
+	  	<h3 class="my-4">Create Customer</h3>
 		<form @submit.prevent="create">
+			<p v-if="error" class="is-danger">{{error}}</p>
 			<div class="form-group">
 			    <label for="text">Name:</label>
 			    <p :class="{ 'control': true }"><input v-model="name" v-validate="'required|alpha'" :class="{'input form-control': true, 'is-danger': errors.has('name') }"type="text" name="name"></p>
@@ -14,7 +15,7 @@
 			</div>
 			<div class="form-group">
 			    <label for="text">Password:</label>
-				<p :class="{ 'control': true }"><input v-model="password" v-validate="'required|alpha'" :class="{'input form-control': true, 'is-danger': errors.has('password') }" type="password" name="password"></p>
+				<p :class="{ 'control': true }"><input v-model="password" v-validate="'required'" :class="{'input form-control': true, 'is-danger': errors.has('password') }" type="password" name="password"></p>
 				<span v-show="errors.has('password')" class="help is-danger">{{ errors.first('password') }}</span>
 			</div>
 			<div class="form-group">
@@ -25,13 +26,6 @@
 			<div class="form-group">
 			    <label for="text">Discaunt:</label>
 			    <input type="text" class="form-control" v-model="discaunt">
-			</div>
-			<div class="form-group">
-				<label for="text">Status:</label>
-				<select class="form-control" id="" v-model="status">
-					<option value="1">Active</option>
-					<option value="0">Inactive</option>
-				</select>
 			</div>
 			<button type="submit" class="btn btn-default">Create</button>
 		</form>
@@ -50,11 +44,13 @@ export default {
 			password: '',
 			repeat_password: '',
 			discaunt: '',
-			status: ''
+			status: '',
+			error: ''
 		}
   	},
  	methods: {
  		create: function() {
+ 			let self = this
 			this.$validator.validateAll().then((result) => {
 		        if (result) {
 					let config = {
@@ -66,14 +62,15 @@ export default {
 					this.axios.post(this.$parent.$parent.AJAX_URL + '/book/client/api/customers', {
 							name: this.name,
 							email: this.email,
-							password: this.password,
-							discaunt: this.discaunt,
+							password: btoa(this.password),
+							discaunt: (this.discaunt) ? +this.discaunt : 0,
+							status: 1,
 						}, config)  
 						.then((response) => {
 
 							if (response.status == 200) {
 								if (!response.data.success) {
-									console.log(response.data.message)
+									self.error = response.data.message
 								} else {
 									location.href = '#/admin/customers'
 								}

@@ -1,15 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Dash from '@/components/Dash'
-import Home from '@/components/views/Home'
+
 import PageNotFound from '@/components/PageNotFound'
-import RegisterForm from '@/components/RegisterForm'
-import User from '@/components/User'
-import About from '@/components/views/About'
+
 
 /*admin*/
-import Dashboard from '@/components/admin/Dashboard'
+import Layout from '@/components/admin/Layout'
 import Login from '@/components/admin/Login'
+import Dashboard from '@/components/admin/dashboard/index'
 
 /*admin authors*/
 import AdminAuthors from '@/components/admin/authors/index'
@@ -36,38 +34,38 @@ import AdminOrders from '@/components/admin/orders/index'
 
 /*end admin*/
 
+/*frontend*/
+import Category from '@/components/views/Category'
+import Book from '@/components/views/Book'
+import RegisterForm from '@/components/views/RegisterForm'
+import User from '@/components/views/User'
+import About from '@/components/views/About'
+import LayoutMain from '@/components/Layout'
+import Home from '@/components/views/Home'
+
+/*end frontend*/
+
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
-      path: '/',
-      name: 'dash',
-      component: Dash,
-      children: [
-        {
-          path: '',
-          name: 'Home',
-          component: Home
-        },
-        {
-          path: '/about',
-          name: 'About',
-          component: About
-        },
-		{
-		  path: '/register',
-		  name: 'RegisterForm',
-		  component: RegisterForm
-		},
-      ]
+      path: '/admin/login',
+      name: 'Login',
+      component: Login
     },
     {
       path: '/admin',
-      name: 'Dashboard',
-      component: Dashboard,
+      name: 'Layout',
+      component: Layout,
       children: [
+        {
+          path: '/admin',
+          name: 'Dashboard',
+          component: Dashboard,
+        },
         {
           path: '/admin/authors',
           name: 'AdminAuthors',
@@ -98,7 +96,7 @@ export default new Router({
           name: 'GenreEdit',
           component: GenreEdit,
         },
-		{
+		    {
           path: '/admin/books',
           name: 'AdminBooks',
           component: AdminBooks,
@@ -113,7 +111,7 @@ export default new Router({
           name: 'BookEdit',
           component: BookEdit,
         },
-		{
+		    {
           path: '/admin/customers',
           name: 'AdminCustomers',
           component: AdminCustomers,
@@ -128,19 +126,50 @@ export default new Router({
           name: 'CustomerEdit',
           component: CustomerEdit,
         },
-		{
+		    {
           path: '/admin/orders',
           name: 'AdminOrders',
           component: AdminOrders,
         },
       ]
     },
-    {
-      path: '/admin/login',
-      name: 'Login',
-      component: Login
+     {
+      path: '/',
+      name: 'layout',
+      component: LayoutMain,
+      children: [
+        {
+          path: '',
+          name: 'Home',
+          component: Home
+        },
+        {
+          path: '/about',
+          name: 'About',
+          component: About
+        },
+        {
+          path: '/book/:id',
+          name: 'Book',
+          component: Book
+        },
+        {
+          path: '/:category/:id',
+          name: 'Category',
+          component: Category
+        },
+        {
+          path: '/register',
+          name: 'RegisterForm',
+          component: RegisterForm
+        },
+        {
+          path: '/user',
+          name: 'User',
+          component: User
+        },
+      ]
     },
-
     {
       path: '/user',
       name: 'User',

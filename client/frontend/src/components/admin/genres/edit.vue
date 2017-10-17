@@ -25,31 +25,28 @@ export default {
   	},
  	methods: {
  		edit: function() {
-			this.$validator.validateAll().then((result) => {
-		        if (result) {
-					let config = {
-						headers: {
-							'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
-						}
-					}
-				
-					this.axios.put(this.$parent.$parent.AJAX_URL + '/book/client/api/genres/' + this.$route.params.id, {
-							name: (this.name) ? this.name : this.genre.name
-						}, config)  
-						.then((response) => {
-
-							if (response.status == 200) {
-								if (!response.data.success) {
-									console.log(response.data.message)
-								} else {
-									location.href = '#/admin/genres'
-								}
-							} else {
-								console.log(response.data.message)
-							}
-						})
+			
+			let config = {
+				headers: {
+					'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
 				}
-     		});
+			}
+		
+			this.axios.put(this.$parent.$parent.AJAX_URL + '/book/client/api/genres/' + this.$route.params.id, {
+					name: (this.name) ? this.name : this.genre.name
+				}, config)  
+				.then((response) => {
+
+					if (response.status == 200) {
+						if (!response.data.success) {
+							console.log(response.data.message)
+						} else {
+							location.href = '#/admin/genres'
+						}
+					} else {
+						console.log(response.data.message)
+					}
+ 			})
  		}
   	},
     created() {
