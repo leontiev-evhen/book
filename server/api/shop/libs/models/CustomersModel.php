@@ -36,11 +36,30 @@ class CustomersModel extends \core\Model
                 'create_at'])
             ->from($this->table)
             ->where(['id' => "<:id>"])
+			->limit(1)
             ->execute();
         $sql = str_replace(["'<", ">'"], '', $sql);
         
         $STH = $this->connect->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
         if ($STH->execute([':id' => $id]))
+        {
+            return $STH->fetch(PDO::FETCH_ASSOC);
+        }  
+        return false;
+    }
+	
+	public function getCustomerToken ($token)
+    {
+        $sql = $this->select([
+                'id'])
+            ->from($this->table)
+            ->where(['id' => "<:token>"])
+			->limit(1)
+            ->execute();
+        $sql = str_replace(["'<", ">'"], '', $sql);
+        
+        $STH = $this->connect->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        if ($STH->execute([':token' => $token]))
         {
             return $STH->fetch(PDO::FETCH_ASSOC);
         }  
@@ -127,6 +146,7 @@ class CustomersModel extends \core\Model
                 'discaunt' => '<?>',
                 'status' => '<?>'])
             ->where(['id' => '<?>'])
+			->limit(1)
             ->execute();
         $sql = str_replace(["'<", ">'"], '', $sql);
         
@@ -217,6 +237,7 @@ class CustomersModel extends \core\Model
 	        	'token' => '<?>',
 	         	'token_create_at' => '<?>'])
 	        ->where(['id' => '<?>'])
+			->limit(1)
 	       	->execute();
         $sql = str_replace(["'<", ">'"], '', $sql);
         

@@ -73,7 +73,6 @@
 		}
   	},
   	created() {
-  		console.log(this.$parent.$parent.$parent)
   		if (this.$parent.$parent.$parent.user) {
   			this.access = true
   		}

@@ -35,6 +35,7 @@ class BooksModel extends \core\Model
                 'create_at'])
             ->from($this->table)
             ->where(['id' => "<:id>"])
+			->limit(1)
            	->execute();
         $sql = str_replace(["'<", ">'"], '', $sql);
 
@@ -116,6 +117,7 @@ class BooksModel extends \core\Model
                 'price'       => '<?>',
                 'discaunt'    => '<?>'])
 	        ->where(['id' => '<?>'])
+			->limit(1)
 	       	->execute();
         $sql = str_replace(["'<", ">'"], '', $sql);
         
@@ -139,6 +141,7 @@ class BooksModel extends \core\Model
     	$sql = $this->delete()
 	        ->from($this->table)
 	        ->where(['id' => '<?>'])
+			->limit(1)
 	       	->execute();
         $sql = str_replace(["'<", ">'"], '', $sql);
         

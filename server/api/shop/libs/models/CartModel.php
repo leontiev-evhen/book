@@ -41,10 +41,10 @@ class CartModel extends \core\Model
 	        $sql = str_replace(["'<", ">'"], '', $sql);
 	        
 	        $STH = $this->connect->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-            $count = 1;
+ 
 	        $STH->bindParam(1, $data->id_book);
 	        $STH->bindParam(2, $data->id_customer);
-            $STH->bindParam(3, $count);
+            $STH->bindParam(3, $data->count);
             $STH->bindParam(4, $this->date);
 	        if ($STH->execute())
 	        {

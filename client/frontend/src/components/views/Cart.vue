@@ -13,12 +13,12 @@
 				</tr>
 				</thead>
 				<tbody>
-				<tr v-for="(book, key) in books">
+				<tr v-for="(item, key) in data">
 				  	<td>{{key+1}}</td>
-				  	<td>{{book.name}}</td>
-				  	<td>{{book.count}}</td>
-				  	<td>{{book.price}}</td>
-				  	<td>{{book.price * book.count}}</td>
+				  	<td>{{item.name}}</td>
+				  	<td>{{item.count}}</td>
+				  	<td>{{item.price}}</td>
+				  	<td>{{item.price * item.count}}</td>
 				</tr>
 				</tbody>
 				</table>
@@ -31,19 +31,25 @@
 <script>
 
 export default {
-  name: 'book',
+  name: 'cart',
   data () {
     return {
-    	books: ''
+    	data: ''
     }
   },
   created() {
   	if (this.$parent.$parent.user) {
-		this.axios.get(this.$parent.$parent.AJAX_URL + '/book/client/api/cart/' + this.$parent.$parent.user.id).then((response) => {
-
+		let instance = this.axios.create({
+			baseURL: this.$parent.$parent.AJAX_URL
+		});
+		
+		instance.defaults.headers.common['Authorization'] = this.$parent.$parent.user.access_token
+			
+		this.axios.get(this.$parent.$parent.AJAX_URL + '/book/client/api/cart').then((response) => {
+			
           if (response.status == 200) {
             if (response.data.status) {
-              this.books = response.data.data
+              this.data = response.data.data
             } else {
               console.log(response.data.message)
             }

@@ -6,28 +6,31 @@ class CartController extends \core\Controller
 {
 
     protected $model;
+	protected $model_customer;
     private $id;
     protected $rules = [
         'id_book' 	  => 'integer',
-        'id_customer' => 'integer'
+        'count' => 'integer'
     ];
 
     public function __construct ($params)
     {
         $this->model = new \models\CartModel();
-        
-        if ($params)
-        {
-        	$param = explode('/', $params);
-    		$this->id = (int)$param[0];
-        }
+        $this->model_customer = new \models\CustomersModel();
+		$this->model_payment = new \models\PaymentSystemModel();
+		$this->headers = getallheaders();
+		
     }
 
     public function getCart ()
     {
-    	if ($this->id)
+		$id = $this->model_customer->getCustomerToken($this->headers['Authorization']);
+		
+    	if ($id)
     	{
-    		$data = $this->model->getAll($this->id);
+    		$data = $this->model->getAll($id);
+			$data['payment_systems'] = $this->model_payment->getAll();
+			
 	    	if ($data)
 	        {
 	            return $this->getServerAnswer(200, true, 'books were received', $data);
@@ -43,16 +46,10 @@ class CartController extends \core\Controller
     {
     	if ($this->validate()) 
         {
-        	if ($count = $this->checkBookCart($this->data->id_book, $this->data->id_customer))
-        	{
-        		$this->data->count = $count;
-        		$data = $this->model->updateCart($this->data);
-        	} 
-        	else
-        	{
-        		$data = $this->model->createCart($this->data);
-        	}
-            
+			$data->id = $this->model_customer->getCustomerToken($this->headers['Authorization']);
+		
+        	$data = $this->model->createCart($this->data);
+
             if ($data)
             {
                 return $this->getServerAnswer(200, true, 'book was added to cart successfully');

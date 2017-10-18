@@ -6,8 +6,12 @@
 			<div class="col-md-4">
 				<img class="card-img-top" src="http://placehold.it/700x400" alt="">
 				<p v-if="price" class="discount"> - <i class="fa fa-eur" aria-hidden="true"></i> {{book.discaunt}}</p>
-				<button v-if="this.$parent.$parent.user" class="btn btn-primary btn-cart mt-20" @click="addCart">Add Cart</button>
-				<p class="success mt-20">{{success}}</p>
+				<div v-if="this.$parent.$parent.user">
+					<button class="btn btn-primary btn-cart mt-20" @click="addCart">Add Cart</button>
+					
+					<button @click="changeCount(-1)">-</button><span v-model="count">{{count}}</span><button @click="changeCount(+1)">+</button>
+					<p class="success mt-20">{{success}}</p>
+				</div>
 			</div>
 			<div class="col-md-8">
 				<h5>Description:</h5>
@@ -42,7 +46,8 @@ export default {
     return {
     	book: '',
     	price: 0,
-    	success: ''
+    	success: '',
+		count: 1
     }
   },
   created() {
@@ -73,10 +78,16 @@ export default {
 			    'Content-Type' : 'application/x-www-form-urlencoded'
 			  }
 			}
+			
+			let instance = this.axios.create({
+				baseURL: this.$parent.$parent.AJAX_URL
+			});
+		
+			instance.defaults.headers.common['Authorization'] = this.$parent.$parent.user.access_token
 
 		    this.axios.post(this.$parent.$parent.AJAX_URL + '/book/client/api/cart', {
 		    	id_book: +this.$route.params.id,
-		    	id_customer: +this.$parent.$parent.user.id
+				count: +this.count
 		    }, config)  
 		    .then(function (response) {
 		    	if (!response.data.success) {
@@ -89,7 +100,13 @@ export default {
 			.catch(function (error) {
 			    console.log(error);
 			});
-  		}
+  		},
+		changeCount(operation) {
+			this.count += operation
+			if (this.count <= 1) {
+				this.count = 1;
+			}
+  		},
   }
 }
 </script>

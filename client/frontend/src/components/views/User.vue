@@ -77,44 +77,19 @@
   			location.href = '/';
   		}
 
-  		let instance = this.axios.create({
-  			baseURL: this.$parent.$parent.AJAX_URL
-		});
-		
-  		let self = this
-  	
-  		instance.defaults.headers.common['Authorization'] = this.$parent.$parent.user.access_token
-
-  		this.axios.get(this.$parent.$parent.AJAX_URL + '/book/client/api/auth')  
-    	.then(function (response) {
-		  	if (response.status == 200) {
-	            if (response.data.success) {
 	            	
-	            	 self.axios.get(self.$parent.$parent.AJAX_URL + '/book/client/api/orders/all/customer')  
-				    	.then(function (response) {
-						  	if (response.status == 200) {
-					            if (response.data.success) {
-					            	self.orders = response.data.data
-					            } else {
-					            	console.log(response.data.message)
-					            }
-					      	} else {
-					        	console.log(response.data.message)
-					      	}
-						})
-
-	            } else {
-	              	self.$parent.$parent.logout()
-	            }
-	      	} else {
-	        	console.log(response.data.message)
-	      	}
-		}) 
-
-
-	    
-
-	
+		this.axios.get(this.$parent.$parent.AJAX_URL + '/book/client/api/orders/all/customer')  
+		.then(function (response) {
+			if (response.status == 200) {
+				if (response.data.success) {
+					this.orders = response.data.data
+				} else {
+					console.log(response.data.message)
+				}
+			} else {
+				console.log(response.data.message)
+			}
+		})
   	},
   	methods: {
   		moreInfo: function(id) {

@@ -29,7 +29,30 @@ export default {
     }
   },
   created() {
-    this.user = JSON.parse(localStorage.getItem("profile"))
+  
+		this.user = JSON.parse(localStorage.getItem("profile"))
+	
+		if (this.user) {
+			let instance = this.axios.create({
+				baseURL: this.AJAX_URL
+			});
+			instance.defaults.headers.common['Authorization'] = this.user.access_token
+
+			this.axios.get(this.AJAX_URL + '/book/client/api/auth')  
+			.then(function (response) {
+		  	if (response.status == 200) {
+	            if (response.data.success) {
+	            	console.log('success')
+	            } else {
+				console.log('error')
+	              	//this.logout()
+	            }
+	      	} else {
+	        	console.log(response.data.message)
+	      	}
+			})
+		}
+  		 
   },
   components: {
     

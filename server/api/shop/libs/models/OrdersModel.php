@@ -42,6 +42,7 @@ class OrdersModel extends \core\Model
             ->from($this->table)
             ->join('left', 'payment_system ON payment_system.id = orders.id_payment')
             ->where(['orders.id' => "<:id>"])
+			->limit(1)
             ->execute();
         $sql = str_replace(["'<", ">'"], '', $sql);
         //echo $sql;
@@ -122,6 +123,7 @@ class OrdersModel extends \core\Model
             ->from($this->table)
             ->set(['id_status' => '<?>',])
             ->where(['id' => '<?>'])
+			->limit(1)
             ->execute();
         $sql = str_replace(["'<", ">'"], '', $sql);
         
