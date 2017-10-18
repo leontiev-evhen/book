@@ -42,6 +42,7 @@ import User from '@/components/views/User'
 import About from '@/components/views/About'
 import LayoutMain from '@/components/Layout'
 import Home from '@/components/views/Home'
+import Cart from '@/components/views/Cart'
 
 /*end frontend*/
 
@@ -62,7 +63,7 @@ export default new Router({
       component: Layout,
       children: [
         {
-          path: '/admin',
+          path: '',
           name: 'Dashboard',
           component: Dashboard,
         },
@@ -167,6 +168,11 @@ export default new Router({
           path: '/user',
           name: 'User',
           component: User
+        },
+        {
+          path: '/cart',
+          name: 'Cart',
+          component: Cart
         },
       ]
     },

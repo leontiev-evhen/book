@@ -16,6 +16,9 @@
             <li class="nav-item">
               <a class="nav-link" href="/about">About</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/cart">Cart</a>
+            </li>
           </ul>
 		      <auth-form @login="login" @logout="logout"></auth-form>
         </div>

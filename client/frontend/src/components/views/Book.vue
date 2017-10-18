@@ -6,7 +6,8 @@
 			<div class="col-md-4">
 				<img class="card-img-top" src="http://placehold.it/700x400" alt="">
 				<p v-if="price" class="discount"> - <i class="fa fa-eur" aria-hidden="true"></i> {{book.discaunt}}</p>
-				<button class="btn btn-primary btn-cart mt-20">Add Cart</button>
+				<button v-if="this.$parent.$parent.user" class="btn btn-primary btn-cart mt-20" @click="addCart">Add Cart</button>
+				<p class="success mt-20">{{success}}</p>
 			</div>
 			<div class="col-md-8">
 				<h5>Description:</h5>
@@ -40,7 +41,8 @@ export default {
   data () {
     return {
     	book: '',
-    	price: 0
+    	price: 0,
+    	success: ''
     }
   },
   created() {
@@ -62,6 +64,32 @@ export default {
           }
     })
 
+  },
+  methods: {
+  		addCart: function() {
+  			let self = this
+		    let config = {
+			  headers: {
+			    'Content-Type' : 'application/x-www-form-urlencoded'
+			  }
+			}
+
+		    this.axios.post(this.$parent.$parent.AJAX_URL + '/book/client/api/cart', {
+		    	id_book: +this.$route.params.id,
+		    	id_customer: +this.$parent.$parent.user.id
+		    }, config)  
+		    .then(function (response) {
+		    	if (!response.data.success) {
+		    		console.log(response.data.message)
+		    	} else {
+		    		self.success = response.data.message
+		    	}
+		    	
+			})
+			.catch(function (error) {
+			    console.log(error);
+			});
+  		}
   }
 }
 </script>
