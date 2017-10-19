@@ -51,9 +51,10 @@ class CustomersModel extends \core\Model
 	public function getCustomerToken ($token)
     {
         $sql = $this->select([
-                'id'])
+                'id',
+                'discaunt'])
             ->from($this->table)
-            ->where(['id' => "<:token>"])
+            ->where(['token' => "<:token>"])
 			->limit(1)
             ->execute();
         $sql = str_replace(["'<", ">'"], '', $sql);

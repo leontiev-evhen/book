@@ -18,7 +18,7 @@
 	                    </div>
 	                </div>
 	            </div>
-	            <a href="#/admin/authors">
+	            <a href="/admin/authors">
 	                <div class="panel-footer">
 	                    <span class="pull-left">View Details</span>
 	                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -39,7 +39,7 @@
 	                    </div>
 	                </div>
 	            </div>
-	            <a href="#/admin/genres">
+	            <a href="/admin/genres">
 	                <div class="panel-footer">
 	                    <span class="pull-left">View Details</span>
 	                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -60,7 +60,7 @@
 	                    </div>
 	                </div>
 	            </div>
-	            <a href="#/admin/books">
+	            <a href="/admin/books">
 	                <div class="panel-footer">
 	                    <span class="pull-left">View Details</span>
 	                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -81,7 +81,7 @@
 	                    </div>
 	                </div>
 	            </div>
-	            <a href="#/admin/customers">
+	            <a href="/admin/customers">
 	                <div class="panel-footer">
 	                    <span class="pull-left">View Details</span>
 	                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -102,7 +102,7 @@
 	                    </div>
 	                </div>
 	            </div>
-	            <a href="#/admin/orders">
+	            <a href="/admin/orders">
 	                <div class="panel-footer">
 	                    <span class="pull-left">View Details</span>
 	                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

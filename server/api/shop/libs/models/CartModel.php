@@ -9,10 +9,13 @@ class CartModel extends \core\Model
     public function getAll ($id)
     {
         $sql = $this->select([
+                'books.id',
                 'books.name',
                 'books.price',
                 'books.discaunt',
-                'cart.count'])
+                'cart.count',
+                'cart.id_book',
+                'cart.id_customer'])
             ->from($this->table)
             ->join('right', 'books', 'books.id = cart.id_book')
             ->where(['id_customer' => '<?>'])
@@ -77,17 +80,40 @@ class CartModel extends \core\Model
         return false;
     }
 
-    public function deleteCart ($id)
+    public function deleteCart ($id_book, $id_customer)
     {
     	$sql = $this->delete()
 	        ->from($this->table)
-	        ->where(['id' => '<?>'])
+	        ->where(['id_book' => '<?>'])
+            ->where(['id_customer' => '<?>'], 'and')
+            ->limit(1)
 	       	->execute();
         $sql = str_replace(["'<", ">'"], '', $sql);
         
         $STH = $this->connect->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-        $STH->bindParam(1, $id);
+        $STH->bindParam(1, $id_book);
+        $STH->bindParam(2, $id_customer);
+
+        if ($STH->execute())
+        {
+            return true;
+        }  
+        return false;
+    }
+
+    public function deleteCartCustomer ($id_customer)
+    {
+        $sql = $this->delete()
+            ->from($this->table)
+            ->where(['id_customer' => '<?>'])
+            ->limit(1)
+            ->execute();
+        $sql = str_replace(["'<", ">'"], '', $sql);
+        
+        $STH = $this->connect->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $STH->bindParam(1, $id_customer);
 
         if ($STH->execute())
         {

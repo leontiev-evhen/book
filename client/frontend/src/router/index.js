@@ -43,6 +43,7 @@ import About from '@/components/views/About'
 import LayoutMain from '@/components/Layout'
 import Home from '@/components/views/Home'
 import Cart from '@/components/views/Cart'
+import Success from '@/components/views/Success'
 
 /*end frontend*/
 
@@ -141,38 +142,43 @@ export default new Router({
       children: [
         {
           path: '',
-          name: 'Home',
+          name: 'layout.Home',
           component: Home
         },
         {
           path: '/about',
-          name: 'About',
+          name: 'layout.About',
           component: About
         },
         {
           path: '/book/:id',
-          name: 'Book',
+          name: 'layout.Book',
           component: Book
         },
         {
           path: '/:category/:id',
-          name: 'Category',
+          name: 'layout.Category',
           component: Category
         },
         {
           path: '/register',
-          name: 'RegisterForm',
+          name: 'layout.RegisterForm',
           component: RegisterForm
         },
         {
           path: '/user',
-          name: 'User',
+          name: 'layout.User',
           component: User
         },
         {
           path: '/cart',
-          name: 'Cart',
+          name: 'layout.Cart',
           component: Cart
+        },
+        {
+          path: '/success',
+          name: 'layout.Success',
+          component: Success
         },
       ]
     },

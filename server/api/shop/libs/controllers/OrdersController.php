@@ -10,11 +10,12 @@ class OrdersController extends \core\Controller
 	private $customer_id;
 
 	protected $rules = [
-		'auto_id' 		=> 'integer',
 		'user_id' 		=> 'integer',
 		'payment_id'	=> 'integer',
 		'id_status'		=> 'integer',
 		'id'			=> 'integer',
+        'books'         => 'array',
+        'sum'           => 'integer'
 	];
 
 
@@ -22,6 +23,7 @@ class OrdersController extends \core\Controller
     {
         $this->model = new \models\OrdersModel();
         $this->status_model = new \models\StatusOrderModel();
+        $this->model_customer = new \models\CustomersModel();
         $this->headers = getallheaders();
 
         if (!empty($params))
@@ -82,9 +84,13 @@ class OrdersController extends \core\Controller
 
   	public function postOrders ()
 	{
+
 		if ($this->validate()) 
 		{
-			if ($this->model->preOrderAuto($this->data))
+            $customer = $this->model_customer->getCustomerToken($this->headers['Authorization']);
+            $this->data->id_customer = $customer['id'];
+            
+			if ($this->model->createOrder($this->data))
 			{
 				return $this->getServerAnswer(200, true, 'order was added successful');
 			}

@@ -21,6 +21,7 @@ class OrdersModel extends \core\Model
             ->from($this->table)
             ->join('left', 'customers', 'customers.id = orders.id_customer')
             ->join('left', 'status_order', 'status_order.id = orders.id_status')
+            ->orderBy('orders.create_at', 'desc')
             ->execute();
         $sql = str_replace(["'<", ">'"], '', $sql);
         
@@ -71,50 +72,58 @@ class OrdersModel extends \core\Model
         return $data;
     }
 
-
-
-	public function preOrderAuto ($data)
+	public function createOrder ($data)
     {
+        $res = false;
         $sql = $this->insert()
             ->from($this->table)
             ->values([
-            'auto_id' => '<?>',
-            'user_id' => '<?>',
-            'payment_id' => '<?>'])
+            'sum' => '<?>',
+            'id_customer' => '<?>',
+            'id_status' => '<?>',
+            'id_payment' => '<?>',
+            'create_at' => '<?>'])
            ->execute();
         $sql = str_replace(["'<", ">'"], '', $sql);
         
         $STH = $this->connect->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-        $STH->bindParam(1, $data->auto_id);
-        $STH->bindParam(2, $data->user_id);
-        $STH->bindParam(3, $data->payment_id);
-        if ($STH->execute())
-        {
-            return true;
-        }  
-        return false;
-    }
 
-    public function getUserOrders ($id)
-    {
-        $sql = $this->select([
-                'model.name',
-                'auto.image',
-                'orders.id as ID',
-                'orders.status'])
-            ->from($this->table)
-            ->join('left', 'auto', 'auto.id = orders.auto_id')
-            ->join('left', 'model', 'model.id = auto.model_id')
-            ->where(['orders.user_id' => "<:id>"])
-           ->execute();
-        $sql = str_replace(["'<", ">'"], '', $sql);
-        
-        $STH = $this->connect->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-        if ($STH->execute([':id' => $id]))
+        $status = 1;
+        $STH->bindParam(1, $data->sum);
+        $STH->bindParam(2, $data->id_customer);
+        $STH->bindParam(3, $status);
+        $STH->bindParam(4, $data->payment_id);
+        $STH->bindParam(5, $this->date);
+
+        $STH->execute();
+        if (!empty($data->books))
         {
-            return $STH->fetchAll();
-        }  
-        return false;
+            $id_order = $this->connect->lastInsertId();
+            foreach ($data->books as $value) {
+                $sql = $this->insert()
+                    ->from('book2order')
+                    ->values([
+                        'id_order'    => '<?>',
+                        'id_book'  => '<?>',
+                        'count'  => '<?>'])
+                    ->execute();
+                $sql = str_replace(["'<", ">'"], '', $sql);
+                
+                $STH = $this->connect->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+                $STH->bindParam(1, $id_order);
+                $STH->bindParam(2, $value->id_book);
+                $STH->bindParam(3, $value->count);
+
+                if ($STH->execute())
+                {
+                    $res = true;
+                }
+            }
+
+
+        } 
+        return $res;
     }
 
     public function updateOrderStatus ($data, $id)
@@ -150,6 +159,7 @@ class OrdersModel extends \core\Model
             ->join('left', 'customers', 'customers.id = orders.id_customer')
             ->join('right', 'status_order', 'status_order.id = orders.id_status')
             ->where(['customers.token' => "<:token>"])
+            ->orderBy('orders.create_at', 'desc')
            ->execute();
         $sql = str_replace(["'<", ">'"], '', $sql);
         

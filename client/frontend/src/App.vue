@@ -24,12 +24,12 @@ export default {
       this.user = JSON.parse(localStorage.getItem("profile"))
     },
     logout: function() {
-        localStorage.clear()
+        delete localStorage["profile"]
         location.href = '/';
     }
   },
   created() {
-  
+    let self = this
 		this.user = JSON.parse(localStorage.getItem("profile"))
 	
 		if (this.user) {
@@ -41,11 +41,8 @@ export default {
 			this.axios.get(this.AJAX_URL + '/book/client/api/auth')  
 			.then(function (response) {
 		  	if (response.status == 200) {
-	            if (response.data.success) {
-	            	console.log('success')
-	            } else {
-				console.log('error')
-	              	//this.logout()
+	            if (!response.data.success) {
+	              	self.logout()
 	            }
 	      	} else {
 	        	console.log(response.data.message)

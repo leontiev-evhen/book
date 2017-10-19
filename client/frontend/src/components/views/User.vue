@@ -76,13 +76,13 @@
   		if (!this.$parent.$parent.user) {
   			location.href = '/';
   		}
-
+  		let self = this
 	            	
 		this.axios.get(this.$parent.$parent.AJAX_URL + '/book/client/api/orders/all/customer')  
 		.then(function (response) {
 			if (response.status == 200) {
 				if (response.data.success) {
-					this.orders = response.data.data
+					self.orders = response.data.data
 				} else {
 					console.log(response.data.message)
 				}

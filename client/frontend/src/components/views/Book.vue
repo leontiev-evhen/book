@@ -9,7 +9,9 @@
 				<div v-if="this.$parent.$parent.user">
 					<button class="btn btn-primary btn-cart mt-20" @click="addCart">Add Cart</button>
 					
-					<button @click="changeCount(-1)">-</button><span v-model="count">{{count}}</span><button @click="changeCount(+1)">+</button>
+					<button @click="changeCount(-1)" class="btn btn-default btn-cart mt-20">-</button>
+					<span v-model="count" class="count">{{count}}</span>
+					<button @click="changeCount(+1)" class="btn btn-default btn-cart mt-20">+</button>
 					<p class="success mt-20">{{success}}</p>
 				</div>
 			</div>

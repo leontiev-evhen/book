@@ -58,16 +58,10 @@
 		        }
      		});
 		},
-		logout: function () {
-			this.email = ''
-			this.password = ''
-			this.access = false
-			this.$emit('logout')
-		}
   	},
   	created() {
-  		if (this.$parent.user) {
-  			this.access = true
+  		if (localStorage["admin"]) {
+  			location.href="/admin"
   		}
   		
   	}

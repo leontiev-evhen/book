@@ -95,7 +95,7 @@ class GenresController extends \core\Controller
 	        }
 	        else
 	        {
-	            return $this->getServerAnswer(200, false, 'some error');
+	            return $this->getServerAnswer(200, false, 'error');
 	        }
     	}
 

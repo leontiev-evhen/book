@@ -8,12 +8,12 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 
 import VeeValidate from 'vee-validate'
-//import VueDefaultValue from 'vue-default-value'
+import VueDefaultValue from 'vue-default-value'
 
 
 Vue.use(VeeValidate)
 Vue.use(VueAxios, axios)
-//Vue.use(VueDefaultValue)
+Vue.use(VueDefaultValue)
 
 Vue.config.productionTip = false
 

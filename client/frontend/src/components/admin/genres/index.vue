@@ -4,6 +4,7 @@
 	  	<h3 class="my-4">Genres</h3>
 
   		<div class="list-group">
+  			<p class="is-danger">{{error}}</p>
   			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -19,7 +20,7 @@
 					  	<td>{{genre.name}}</td>
 					  	<td>{{genre.create_at}}</td>
 					  	<td>
-						  	<a :href="'#/admin/genre/edit/' + genre.id" class="btn btn-warning">
+						  	<a :href="'/admin/genre/edit/' + genre.id" class="btn btn-warning">
 						  		<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 						  	</a>
 							<button type="button" class="btn btn-danger" @click="remove(genre.id)">
@@ -40,7 +41,8 @@ export default {
   	name: 'index',
  	 data() {
 		return {
-      		genres: ''
+      		genres: '',
+      		error: ''
 		}
   	},
  	methods: {
@@ -50,13 +52,13 @@ export default {
  				this.axios.delete(this.$parent.$parent.AJAX_URL + '/book/client/api/genres/' + id).then((response) => {
 
 			        if (response.status == 200) {
-			            if (response.data.status) {
-			              	location.reload()
+			            if (response.data.success) {
+			            	location.reload()
 			            } else {
-			              	console.log(response.data.message)
+			              	this.error = response.data.message
 			            }
 			        } else {
-			            console.log(response.data.message)
+			        	this.error = response.data.message
 			        }
 		    	})
  			}
@@ -67,7 +69,7 @@ export default {
     this.axios.get(this.$parent.$parent.AJAX_URL + '/book/client/api/genres').then((response) => {
 
         if (response.status == 200) {
-            if (response.data.status) {
+            if (response.data.success) {
               	this.genres = response.data.data
             } else {
               	console.log(response.data.message)

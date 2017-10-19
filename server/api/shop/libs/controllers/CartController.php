@@ -19,17 +19,24 @@ class CartController extends \core\Controller
         $this->model_customer = new \models\CustomersModel();
 		$this->model_payment = new \models\PaymentSystemModel();
 		$this->headers = getallheaders();
+
+        if ($params)
+        {
+            $param = explode('/', $params);
+            $this->id = (int)$param[0];
+        }
 		
     }
 
     public function getCart ()
     {
-		$id = $this->model_customer->getCustomerToken($this->headers['Authorization']);
+		$customer = $this->model_customer->getCustomerToken($this->headers['Authorization']);
 		
-    	if ($id)
+    	if ($customer)
     	{
-    		$data = $this->model->getAll($id);
+    		$data['books'] = $this->model->getAll($customer['id']);
 			$data['payment_systems'] = $this->model_payment->getAll();
+            $data['customer']['discaunt'] = $customer['discaunt'];
 			
 	    	if ($data)
 	        {
@@ -46,9 +53,19 @@ class CartController extends \core\Controller
     {
     	if ($this->validate()) 
         {
-			$data->id = $this->model_customer->getCustomerToken($this->headers['Authorization']);
-		
-        	$data = $this->model->createCart($this->data);
+
+			$customer = $this->model_customer->getCustomerToken($this->headers['Authorization']);
+            $this->data->id_customer = $customer['id'];
+
+            if ($this->checkBookCart($this->data->id_book, $this->data->id_customer))
+            {
+                $data = $this->model->updateCart($this->data);
+            }
+            else 
+            {
+                $data = $this->model->createCart($this->data);
+            }
+
 
             if ($data)
             {
@@ -63,13 +80,27 @@ class CartController extends \core\Controller
         return $this->getServerAnswer(400, false, 'Bad Request');
     }
 
-    public function putCart ()
-    { 
-    	if ($this->validate() && $this->id) 
+
+    public function deleteCart ()
+    {
+        $customer = $this->model_customer->getCustomerToken($this->headers['Authorization']);
+    	if ($this->id)
+    	{
+    		if ($this->model->deleteCart ($this->id, $customer['id']))
+	        {
+	            return $this->getServerAnswer(200, true, 'book delete successful');
+	        }
+	        else
+	        {
+	            return $this->getServerAnswer(200, false, 'some error');
+	        }
+    	}
+        else
         {
-            if ($this->model->updateAuthor($this->data, $this->id))
+
+            if ($this->model->deleteCartCustomer ($customer['id']))
             {
-                return $this->getServerAnswer(200, true, 'cart upadate successful');
+                return $this->getServerAnswer(200, true, 'cart is clear');
             }
             else
             {
@@ -80,32 +111,15 @@ class CartController extends \core\Controller
         return $this->getServerAnswer(400, false, 'Bad Request');
     }
 
-    public function deleteCart ()
-    {
-    	if ($this->id)
-    	{
-    		if ($this->model->deleteAuthor($this->id))
-	        {
-	            return $this->getServerAnswer(200, true, 'cart delete successful');
-	        }
-	        else
-	        {
-	            return $this->getServerAnswer(200, false, 'some error');
-	        }
-    	}
-
-        return $this->getServerAnswer(400, false, 'Bad Request');
-    }
-
     private function checkBookCart ($id_book, $id_customer)
     {
-    	$data = $this->model->getAll();
+    	$data = $this->model->getAll($id_customer);
     	
     	foreach ($data as $item)
     	{
     		if ($item['id_book'] == $id_book && $item['id_customer'] == $id_customer)
     		{
-    			return $item['count'] + 1;
+    			return true;
     		}
     	}
     	return false;

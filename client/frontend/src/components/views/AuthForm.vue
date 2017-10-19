@@ -15,7 +15,10 @@
 		</div>
 		<div class="user_block" v-else>
 			<i class="fa fa-user-times" aria-hidden="true"></i>
-			<a href="/user">{{this.$parent.$parent.$parent.user.name}}</a>
+			
+
+			<router-link :to="{ name: 'layout.User'}">{{this.$parent.$parent.$parent.user.name}}</router-link>
+
 			<p class="logout"><a href="#" @click="logout">Logout</a></p>
 		</div>
 	</div>
