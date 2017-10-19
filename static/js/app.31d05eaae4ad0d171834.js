@@ -3213,7 +3213,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODU
       name: 'layout.Category',
       component: __WEBPACK_IMPORTED_MODULE_19__components_views_Category__["a" /* default */]
     }, {
-      path: '/register',
+      path: '/~user11/book/register',
       name: 'layout.RegisterForm',
       component: __WEBPACK_IMPORTED_MODULE_21__components_views_RegisterForm__["a" /* default */]
     }, {
@@ -4581,4 +4581,4 @@ module.exports = __webpack_require__.p + "static/img/404.d7165a7.png";
 /***/ })
 
 },["NHnr"]);
-//# sourceMappingURL=app.f6340c9fe5ee8ee7913c.js.map
+//# sourceMappingURL=app.31d05eaae4ad0d171834.js.map
