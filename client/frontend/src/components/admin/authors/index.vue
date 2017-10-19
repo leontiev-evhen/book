@@ -4,6 +4,7 @@
 	  	<h3 class="my-4">Authors</h3>
 
   		<div class="list-group">
+			<p class="is-danger">{{error}}</p>
   			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -40,7 +41,8 @@ export default {
   	name: 'author',
  	 data() {
 		return {
-      		authors: ''
+      		authors: '',
+			error: ''
 		}
   	},
  	methods: {
@@ -50,10 +52,10 @@ export default {
  				this.axios.delete(this.$parent.$parent.AJAX_URL + '/book/client/api/authors/' + id).then((response) => {
 
 			        if (response.status == 200) {
-			            if (response.data.status) {
+			            if (response.data.success) {
 			              	location.reload()
 			            } else {
-			              	console.log(response.data.message)
+			              	this.error = response.data.message
 			            }
 			        } else {
 			            console.log(response.data.message)

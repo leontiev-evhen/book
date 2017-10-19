@@ -4,6 +4,7 @@
 	  	<h3 class="my-4">Customers</h3>
 
   		<div class="list-group">
+			<p class="is-danger">{{error}}</p>
   			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -37,7 +38,8 @@ export default {
   	name: 'index',
  	 data() {
 		return {
-      		customers: ''
+      		customers: '',
+			error: ''
 		}
   	},
     created() {
@@ -45,10 +47,10 @@ export default {
     this.axios.get(this.$parent.$parent.AJAX_URL + '/book/client/api/customers').then((response) => {
 
         if (response.status == 200) {
-            if (response.data.status) {
+            if (response.data.success) {
               	this.customers = response.data.data
             } else {
-              	console.log(response.data.message)
+              	this.error = response.data.message
             }
         } else {
             console.log(response.data.message)

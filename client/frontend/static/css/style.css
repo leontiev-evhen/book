@@ -3,7 +3,7 @@ html {
 }
 
 body { 
-  background: url('http://ringvemedia.com/server//bg.jpg') no-repeat center center fixed; 
+  background: url('../images/bg.jpg') no-repeat center center fixed; 
   min-height:100%;
   padding:0;
   margin:0;

@@ -11,13 +11,14 @@
             <li class="nav-item active">
               <a class="nav-link" href="/">Home
                 <span class="sr-only">(current)</span>
+				<i class="fa fa-home" aria-hidden="true"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/about">About</a>
+              <a class="nav-link" href="/about">About <i class="fa fa-info-circle" aria-hidden="true"></i></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/cart">Cart</a>
+              <a class="nav-link" href="/cart">Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
             </li>
           </ul>
 		      <auth-form @login="login" @logout="logout"></auth-form>
