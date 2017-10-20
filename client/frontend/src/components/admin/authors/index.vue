@@ -1,7 +1,7 @@
 <template>
   	<div class="author">
   		
-	  	<h3 class="my-4">Authors</h3>
+	  	<h3 class="my-4">Authors2</h3>
 
   		<div class="list-group">
 			<p class="is-danger">{{error}}</p>
