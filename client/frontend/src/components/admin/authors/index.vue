@@ -1,7 +1,7 @@
 <template>
   	<div class="author">
   		
-	  	<h3 class="my-4">Authors2</h3>
+	  	<h3 class="my-4">Authors</h3>
 
   		<div class="list-group">
 			<p class="is-danger">{{error}}</p>
@@ -20,7 +20,7 @@
 					  	<td>{{author.name}}</td>
 					  	<td>{{author.create_at}}</td>
 					  	<td>
-						  	<a :href="'/admin/author/edit/' + author.id" class="btn btn-warning">
+						  	<a :href="this.$parent.$parent.BASE_URL + '/admin/author/edit/' + author.id" class="btn btn-warning">
 						  		<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 						  	</a>
 							<button type="button" class="btn btn-danger" @click="remove(author.id)">
