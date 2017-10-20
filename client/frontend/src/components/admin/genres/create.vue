@@ -7,7 +7,7 @@
 			    <p :class="{ 'control': true }"><input v-model="name" v-validate="'required'" :class="{'input form-control': true, 'is-danger': errors.has('name') }"type="text" name="name"></p>
 				<span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 			</div>
-			<button type="submit" class="btn btn-default">Create</button>
+			<button type="submit" class="btn btn-primary">Create</button>
 		</form>
 	</div>
 </template>

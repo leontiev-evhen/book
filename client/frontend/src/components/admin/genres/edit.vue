@@ -7,7 +7,7 @@
 				<p :class="{ 'control': true }"><input v-model="name" v-validate="'required|alpha'" :class="{'input form-control': true, 'is-danger': errors.has('name') }"type="text" name="name" v-default-value="genre.name"></p>
 				<span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 			</div>
-			<button type="submit" class="btn btn-default">Edit</button>
+			<button type="submit" class="btn btn-primary">Edit</button>
 		</form>
 	</div>
 </template>

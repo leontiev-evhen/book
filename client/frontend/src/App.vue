@@ -14,8 +14,7 @@ export default {
       //assetUrl: 'http://192.168.0.15/~user11/book/server/api/shop/assets/',
       //assetAutoUrl: 'http://192.168.0.15/~user11/book/server/api/shop/assets/auto/',
       AJAX_URL: 'http://courses.site',
-      assetUrl: 'http://courses.site/book/server/api/shop/assets/',
-      assetAutoUrl: 'http://courses.site/book/server/api/shop/assets/auto/',
+      BASE_URL: 'http://192.168.0.15/~user11/book',
       user: null
     }
   },

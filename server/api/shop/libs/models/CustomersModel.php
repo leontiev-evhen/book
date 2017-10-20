@@ -79,19 +79,21 @@ class CustomersModel extends \core\Model
                 'password' 	 => '<?>',
                 'discaunt' 	 => '<?>',
                 'status'     => '<?>',
+                'id_role'   => '<?>',
                 'create_at' => '<?>'
             ])
            ->execute();
 	        $sql = str_replace(["'<", ">'"], '', $sql);
 	        
 	        $STH = $this->connect->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-	    
+	        $role = ROLE;
 	        $STH->bindParam(1, $data->name);
 	        $STH->bindParam(2, $data->email);
 	        $STH->bindParam(3, $data->password);
 	        $STH->bindParam(4, $data->discaunt);
             $STH->bindParam(5, $data->status);
-	        $STH->bindParam(6, $this->date);
+            $STH->bindParam(6, $role);
+	        $STH->bindParam(7, $this->date);
 	        if ($STH->execute())
 	        {
 	            return ['result' => true, 'message' => 'user was added successful'];
@@ -114,17 +116,19 @@ class CustomersModel extends \core\Model
                 'name'       => '<?>',
                 'email'      => '<?>',
                 'password'   => '<?>',
+                'id_role'   => '<?>',
                 'create_at' => '<?>'
             ])
            ->execute();
             $sql = str_replace(["'<", ">'"], '', $sql);
             
             $STH = $this->connect->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-        
+            $role = ROLE;
             $STH->bindParam(1, $data->name);
             $STH->bindParam(2, $data->email);
             $STH->bindParam(3, $data->password);
-            $STH->bindParam(4, $this->date);
+            $STH->bindParam(4, $role);
+            $STH->bindParam(5, $this->date);
             if ($STH->execute())
             {
                 return ['result' => true, 'message' => 'user was added successful'];

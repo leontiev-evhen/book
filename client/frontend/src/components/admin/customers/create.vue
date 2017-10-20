@@ -27,7 +27,7 @@
 			    <label for="text">Discaunt:</label>
 			    <input type="text" class="form-control" v-model="discaunt">
 			</div>
-			<button type="submit" class="btn btn-default">Create</button>
+			<button type="submit" class="btn btn-primary">Create</button>
 		</form>
 	</div>
 </template>
@@ -72,7 +72,7 @@ export default {
 								if (!response.data.success) {
 									self.error = response.data.message
 								} else {
-									location.href = '#/admin/customers'
+									location.href = '/admin/customers'
 								}
 							} else {
 								console.log(response.data.message)

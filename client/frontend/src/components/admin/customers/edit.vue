@@ -24,7 +24,7 @@
 				<input name="status" type="radio" :value="0" @click="isStatus($event)" :checked="customer.status == 0">
 			</div>
 			
-			<button type="submit" class="btn btn-default">Edit</button>
+			<button type="submit" class="btn btn-primary">Edit</button>
 		</form>
 		<div v-if="orders">
 			<h4 class="my-4">Orders</h4>

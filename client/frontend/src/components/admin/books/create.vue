@@ -21,7 +21,7 @@
 			    <input type="text" class="form-control" v-model="discaunt">
 			</div>
 			
-			<button type="submit" class="btn btn-default">Create</button>
+			<button type="submit" class="btn btn-primary">Create</button>
 		</form>
 	</div>
 </template>

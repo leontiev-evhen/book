@@ -7,3 +7,4 @@ define('DB', 'book');
 define('USER', 'root');
 define('PASSWORD', 'root');
 define('TYPE', '.json');
+define('ROLE', 2);

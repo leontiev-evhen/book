@@ -21,7 +21,7 @@
 					    <label for="text">Discaunt:</label>
 					    <input type="text" class="form-control" v-default-value="book.discaunt" v-model="discaunt">
 					</div>
-					<button type="submit" class="btn btn-default">Edit</button>
+					<button type="submit" class="btn btn-primary">Edit</button>
 				</form>
 	        </tab>
 	        <tab name="Choose author">

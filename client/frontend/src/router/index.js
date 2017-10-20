@@ -161,7 +161,7 @@ export default new Router({
           component: Category
         },
         {
-          path: '/~user11/book/register',
+          path: '/register',
           name: 'layout.RegisterForm',
           component: RegisterForm
         },

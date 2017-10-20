@@ -73,7 +73,7 @@ export default {
   name: 'layout',
   created() {
 		if (!localStorage['admin']) {
-			//location.href = '/admin/login';
+			location.href = '/admin/login';
 		}
   },
   methods: {
