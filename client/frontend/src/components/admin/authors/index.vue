@@ -20,7 +20,7 @@
 					  	<td>{{author.name}}</td>
 					  	<td>{{author.create_at}}</td>
 					  	<td>
-						  	<a :href="this.$parent.$parent.BASE_URL + '/admin/author/edit/' + author.id" class="btn btn-warning">
+						  	<a :href="link + '/admin/author/edit/' + author.id" class="btn btn-warning">
 						  		<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 						  	</a>
 							<button type="button" class="btn btn-danger" @click="remove(author.id)">
@@ -42,7 +42,8 @@ export default {
  	 data() {
 		return {
       		authors: '',
-			error: ''
+			error: '',
+			link: this.$parent.$parent.BASE_URL
 		}
   	},
  	methods: {
