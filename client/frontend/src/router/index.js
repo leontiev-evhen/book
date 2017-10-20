@@ -54,12 +54,12 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/admin/login',
+      path: '/~user11/book/admin/login',
       name: 'Login',
       component: Login
     },
     {
-      path: '/admin',
+      path: '/~user11/book/admin',
       name: 'Layout',
       component: Layout,
       children: [
@@ -69,74 +69,74 @@ export default new Router({
           component: Dashboard,
         },
         {
-          path: '/admin/authors',
+          path: '/~user11/book/admin/authors',
           name: 'AdminAuthors',
           component: AdminAuthors,
         },
         {
-          path: '/admin/author/create',
+          path: '/~user11/book/admin/author/create',
           name: 'AuthorCreate',
           component: AuthorCreate,
         },
         {
-          path: '/admin/author/edit/:id',
+          path: '/~user11/book/admin/author/edit/:id',
           name: 'AuthorEdit',
           component: AuthorEdit,
         },
         {
-          path: '/admin/genres',
+          path: '/~user11/book/admin/genres',
           name: 'AdminGenres',
           component: AdminGenres,
         },
         {
-          path: '/admin/genre/create',
+          path: '/~user11/book/admin/genre/create',
           name: 'GenreCreate',
           component: GenreCreate,
         },
         {
-          path: '/admin/genre/edit/:id',
+          path: '/~user11/book/admin/genre/edit/:id',
           name: 'GenreEdit',
           component: GenreEdit,
         },
 		    {
-          path: '/admin/books',
+          path: '/~user11/book/admin/books',
           name: 'AdminBooks',
           component: AdminBooks,
         },
         {
-          path: '/admin/book/create',
+          path: '/~user11/book/admin/book/create',
           name: 'BookCreate',
           component: BookCreate,
         },
         {
-          path: '/admin/book/edit/:id',
+          path: '/~user11/book/admin/book/edit/:id',
           name: 'BookEdit',
           component: BookEdit,
         },
 		    {
-          path: '/admin/customers',
+          path: '/~user11/book/admin/customers',
           name: 'AdminCustomers',
           component: AdminCustomers,
         },
         {
-          path: '/admin/customer/create',
+          path: '/~user11/book/admin/customer/create',
           name: 'CustomerCreate',
           component: CustomerCreate,
         },
         {
-          path: '/admin/customer/edit/:id',
+          path: '/~user11/book/admin/customer/edit/:id',
           name: 'CustomerEdit',
           component: CustomerEdit,
         },
 		    {
-          path: '/admin/orders',
+          path: '/~user11/book/admin/orders',
           name: 'AdminOrders',
           component: AdminOrders,
         },
       ]
     },
      {
-      path: '/',
+      path: '/~user11/book/',
       name: 'layout',
       component: LayoutMain,
       children: [
@@ -146,44 +146,44 @@ export default new Router({
           component: Home
         },
         {
-          path: '/about',
+          path: '/~user11/book/about',
           name: 'layout.About',
           component: About
         },
         {
-          path: '/book/:id',
+          path: '/~user11/book/book/:id',
           name: 'layout.Book',
           component: Book
         },
         {
-          path: '/:category/:id',
+          path: '/~user11/book/:category/:id',
           name: 'layout.Category',
           component: Category
         },
         {
-          path: '/register',
+          path: '/~user11/book/register',
           name: 'layout.RegisterForm',
           component: RegisterForm
         },
         {
-          path: '/user',
+          path: '/~user11/book/user',
           name: 'layout.User',
           component: User
         },
         {
-          path: '/cart',
+          path: '/~user11/book/cart',
           name: 'layout.Cart',
           component: Cart
         },
         {
-          path: '/success',
+          path: '/~user11/book/success',
           name: 'layout.Success',
           component: Success
         },
       ]
     },
     {
-      path: '/user',
+      path: '/~user11/book/user',
       name: 'User',
       component: User
     },

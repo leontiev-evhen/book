@@ -10,10 +10,8 @@ export default {
   name: 'app',
   data() {
     return {
-      //AJAX_URL: 'http://192.168.0.15/~user11',
-      //assetUrl: 'http://192.168.0.15/~user11/book/server/api/shop/assets/',
-      //assetAutoUrl: 'http://192.168.0.15/~user11/book/server/api/shop/assets/auto/',
-      AJAX_URL: 'http://courses.site',
+      AJAX_URL: 'http://192.168.0.15/~user11',
+      //AJAX_URL: 'http://courses.site',
       BASE_URL: 'http://192.168.0.15/~user11/book',
       user: null
     }

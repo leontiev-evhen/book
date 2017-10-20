@@ -37,10 +37,10 @@ export default {
   	this.axios.get(this.$parent.$parent.AJAX_URL + '/book/client/api/' + this.$route.params.category + '/' + this.$route.params.id).then((response) => {
 
           if (response.status == 200) {
-            if (response.data.status) {
+            if (response.data.success) {
               this.category = response.data.data
             } else {
-              console.log(response.data.message)
+				console.log(response.data.message)
             }
           } else {
             console.log(response.data.message)
