@@ -4,11 +4,11 @@
         <div class="row">
             <div v-for="book in books" class="col-lg-4 col-md-6 mb-4">
               	<div class="card h-100">
-	                <a :href="this.$parent.$parent.BASE_URL + 'book/' + book.id"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+	                <a :href="'book/' + book.id"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                   <p v-if="book.discaunt != 0" class="discount"> - <i class="fa fa-eur" aria-hidden="true"></i> {{book.discaunt}}</p>
 	                <div class="card-body">
 	                  	<h4 class="card-title">
-	                    	<a :href="this.$parent.$parent.BASE_URL + 'book/' + book.id">{{book.name}}</a>
+	                    	<a :href="'book/' + book.id">{{book.name}}</a>
 	                  	</h4>
 	                  	<h5><i class="fa fa-eur" aria-hidden="true"></i>{{book.price}}</h5>
 	                  	<p class="card-text">{{book.description}}</p>

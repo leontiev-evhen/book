@@ -58,7 +58,7 @@
 								<h4>Books</h4>
 								<ol>
 									<li v-for="book in orderInfo[order.id].books">
-										<a :href="this.$parent.$parent.BASE_URL + '/admin/book/edit/' + book.id">{{book.name}}</a>
+										<a :href="'/admin/book/edit/' + book.id">{{book.name}}</a>
 										<i class="fa fa-eur" aria-hidden="true"></i>{{book.price}} 
 									</li>
 								</ol>
@@ -136,7 +136,7 @@ export default {
 						if (!response.data.success) {
 							console.log(response.data.message)
 						} else {
-							location.href = this.$parent.$parent.BASE_URL + '/admin/customers'
+							//location.href = this.$parent.$parent.BASE_URL + '/admin/customers'
 						}
 					} else {
 						console.log(response.data.message)
