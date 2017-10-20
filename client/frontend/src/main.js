@@ -15,7 +15,8 @@ Vue.use(VeeValidate)
 Vue.use(VueAxios, axios)
 Vue.use(VueDefaultValue)
 
-Vue.config.productionTip = true
+Vue.config.productionTip = false
+Vue.config.devtools = true
 
 /* eslint-disable no-new */
 new Vue({
