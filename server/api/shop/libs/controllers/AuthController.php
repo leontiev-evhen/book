@@ -120,7 +120,7 @@ class AuthController extends \core\Controller
 
         for ($i = 0; $i < 32; $i++) 
         {
-            $token .= $codeAlphabet[random_int(0, $max-1)];
+            $token .= $codeAlphabet[rand(0, $max-1)];
         }
 
         return $token;

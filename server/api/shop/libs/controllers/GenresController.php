@@ -29,7 +29,8 @@ class GenresController extends \core\Controller
     		return $this->getGenreById();
     	}
 
-    	$data = $this->model->getAllGenres();
+        $data = $this->model->getAllGenres();
+        
     	if (!empty($data))
     	{
     		return $this->getServerAnswer(200, true, 'genres successfully received', $data);

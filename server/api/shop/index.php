@@ -1,7 +1,7 @@
 <?php
 require_once 'config.php';
 require_once 'Autoloader.php';
-
+date_default_timezone_set('Europe/Kiev');
 try
 {
 	header("Access-Control-Allow-Origin:*");

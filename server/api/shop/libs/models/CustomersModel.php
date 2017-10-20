@@ -121,8 +121,8 @@ class CustomersModel extends \core\Model
             ])
            ->execute();
             $sql = str_replace(["'<", ">'"], '', $sql);
-            
-            $STH = $this->connect->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        
+           $STH = $this->connect->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
             $role = ROLE;
             $STH->bindParam(1, $data->name);
             $STH->bindParam(2, $data->email);
