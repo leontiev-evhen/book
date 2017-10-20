@@ -16,7 +16,7 @@
 				<tbody>
 					<tr v-for="(book, key) in books">
 					  	<td>{{key+1}}</td>
-					  	<td><a :href="'book/' + book.id">{{book.name}}</a></td>
+					  	<td><a :href="this.$parent.$parent.BASE_URL + 'book/' + book.id">{{book.name}}</a></td>
 					  	<td>
 							<button @click="changeCount(key, 0)" class="btn btn-default btn-cart mt-20">-</button>
 							<span class="count">{{book.count}}</span>

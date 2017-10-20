@@ -20,7 +20,7 @@
 					  	<td>{{customer.name}}</td>
 					  	<td>{{customer.create_at}}</td>
 					  	<td>
-						  	<a :href="'admin/customer/edit/' + customer.id" class="btn btn-warning">
+						  	<a :href="this.$parent.$parent.BASE_URL + 'admin/customer/edit/' + customer.id" class="btn btn-warning">
 						  		<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 						  	</a>
 						</td>

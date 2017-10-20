@@ -58,7 +58,7 @@
 								<h4>Books</h4>
 								<ol>
 									<li v-for="book in orderInfo[order.id].books">
-										<a :href="'/admin/book/edit/' + book.id">{{book.name}}</a>
+										<a :href="this.$parent.$parent.BASE_URL + '/admin/book/edit/' + book.id">{{book.name}}</a>
 										<i class="fa fa-eur" aria-hidden="true"></i>{{book.price}} 
 									</li>
 								</ol>

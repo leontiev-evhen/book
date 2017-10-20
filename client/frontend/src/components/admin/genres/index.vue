@@ -20,7 +20,7 @@
 					  	<td>{{genre.name}}</td>
 					  	<td>{{genre.create_at}}</td>
 					  	<td>
-						  	<a :href="'admin/genre/edit/' + genre.id" class="btn btn-warning">
+						  	<a :href="this.$parent.$parent.BASE_URL + 'admin/genre/edit/' + genre.id" class="btn btn-warning">
 						  		<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 						  	</a>
 							<button type="button" class="btn btn-danger" @click="remove(genre.id)">
