@@ -15,7 +15,7 @@ Vue.use(VeeValidate)
 Vue.use(VueAxios, axios)
 Vue.use(VueDefaultValue)
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 
 /* eslint-disable no-new */
 new Vue({
