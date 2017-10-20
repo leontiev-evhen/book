@@ -20,7 +20,7 @@
 					  	<td>{{author.name}}</td>
 					  	<td>{{author.create_at}}</td>
 					  	<td>
-						  	<a :href="this.$parent.$parent.BASE_URL + '/admin/author/edit/' + author.id" class="btn btn-warning">
+						  	<a :href="link + '/admin/author/edit/' + author.id" class="btn btn-warning">
 						  		<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 						  	</a>
 							<button type="button" class="btn btn-danger" @click="remove(author.id)">
@@ -66,7 +66,7 @@ export default {
  		}
   	},
     created() {
-
+	this.link = this.$parent.$parent.BASE_URL
     this.axios.get(this.$parent.$parent.AJAX_URL + '/book/client/api/authors').then((response) => {
 
         if (response.status == 200) {
