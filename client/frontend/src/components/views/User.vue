@@ -41,7 +41,7 @@
 							<h4>Books</h4>
 							<ol>
 								<li v-for="book in orderInfo[order.id].books">
-									<a :href="'/book/' + book.id">{{book.name}}</a>
+									<a :href="'book/' + book.id">{{book.name}}</a>
 									<i class="fa fa-eur" aria-hidden="true"></i>{{book.price}} 
 								</li>
 							</ol>
@@ -74,7 +74,7 @@
   	created() {
   	
   		if (!this.$parent.$parent.user) {
-  			location.href = '/';
+  			location.href = this.$parent.$parent.BASE_URL;
   		}
   		let self = this
 	            	

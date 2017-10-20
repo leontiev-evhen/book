@@ -18,7 +18,7 @@
 				        	</a>
 			      		</div>
 			      		<div class="list-group-item">
-			      			<a href="/admin/authors" >
+			      			<a href="admin/authors" >
 				        		<i class="fa fa-pencil" aria-hidden="true"></i> Authors
 				        	</a>
 							<a href="/admin/author/create" class="btn btn-primary btn_add">
@@ -26,7 +26,7 @@
   							</a>
 			      		</div>
 			        	<div class="list-group-item">
-			      			<a href="/admin/genres" >
+			      			<a href="admin/genres" >
 				        		<i class="fa fa-leaf" aria-hidden="true"></i> Genres
 				        	</a>
 							<a href="/admin/genre/create" class="btn btn-primary btn_add">
@@ -34,10 +34,10 @@
   							</a>
 			      		</div>
 						<div class="list-group-item">
-			      			<a href="/admin/books" >
+			      			<a href="admin/books" >
 				        		<i class="fa fa-book" aria-hidden="true"></i> Books
 				        	</a>
-							<a href="/admin/book/create" class="btn btn-primary btn_add">
+							<a href="admin/book/create" class="btn btn-primary btn_add">
   								<i class="fa fa-plus" aria-hidden="true"></i>
   							</a>
 			      		</div>
@@ -45,12 +45,12 @@
 			      			<a href="/admin/customers" >
 				        		<i class="fa fa-users" aria-hidden="true"></i> Customers
 				        	</a>
-							<a href="/admin/customer/create" class="btn btn-primary btn_add">
+							<a href="admin/customer/create" class="btn btn-primary btn_add">
   								<i class="fa fa-plus" aria-hidden="true"></i>
   							</a>
 			      		</div>
 			      		<div class="list-group-item">
-			      			<a href="/admin/orders" >
+			      			<a href="admin/orders" >
 				        		<i class="fa fa-shopping-cart" aria-hidden="true"></i> Orders
 				        	</a>
 			      		</div>

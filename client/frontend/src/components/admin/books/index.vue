@@ -20,7 +20,7 @@
 					  	<td>{{book.name}}</td>
 					  	<td>{{book.create_at}}</td>
 					  	<td>
-						  	<a :href="'/admin/book/edit/' + book.id" class="btn btn-warning">
+						  	<a :href="'admin/book/edit/' + book.id" class="btn btn-warning">
 						  		<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 						  	</a>
 							<button type="button" class="btn btn-danger" @click="remove(book.id)">

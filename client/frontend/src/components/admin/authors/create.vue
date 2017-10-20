@@ -41,7 +41,7 @@ export default {
 								if (!response.data.success) {
 									console.log(response.data.message)
 								} else {
-									location.href = '/admin/authors'
+									location.href = this.$parent.$parent.BASE_URL + '/admin/authors'
 								}
 							} else {
 								console.log(response.data.message)
