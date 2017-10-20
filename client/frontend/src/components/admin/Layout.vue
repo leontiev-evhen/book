@@ -3,7 +3,7 @@
   	   	<!-- Navigation -->
 	    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 	      <div class="container">
-	        <a class="navbar-brand" href="/admin">Admin panel</a>
+	        <a class="navbar-brand" href="link + '/admin'">Admin panel</a>
 	        <a class="navbar-brand" @click="logout" href="#">Logout</a>
 	      </div>
 	    </nav>
@@ -13,44 +13,44 @@
 		          	<h3 class="my-4">Menu</h3>
 			      	<div class="list-group">
 			      		<div class="list-group-item">
-			      			<a href="/admin" >
+			      			<a href="link + '/admin'" >
 				        		<i class="fa fa-dashboard fa-fw" aria-hidden="true"></i> Dashboard
 				        	</a>
 			      		</div>
 			      		<div class="list-group-item">
-			      			<a href="admin/authors" >
+			      			<a href="link + 'admin/authors'" >
 				        		<i class="fa fa-pencil" aria-hidden="true"></i> Authors
 				        	</a>
-							<a href="/admin/author/create" class="btn btn-primary btn_add">
+							<a href="link + '/admin/author/create'" class="btn btn-primary btn_add">
   								<i class="fa fa-plus" aria-hidden="true"></i>
   							</a>
 			      		</div>
 			        	<div class="list-group-item">
-			      			<a href="admin/genres" >
+			      			<a href="link + 'admin/genres'" >
 				        		<i class="fa fa-leaf" aria-hidden="true"></i> Genres
 				        	</a>
-							<a href="/admin/genre/create" class="btn btn-primary btn_add">
+							<a href="link + '/admin/genre/create'" class="btn btn-primary btn_add">
   								<i class="fa fa-plus" aria-hidden="true"></i>
   							</a>
 			      		</div>
 						<div class="list-group-item">
-			      			<a href="admin/books" >
+			      			<a href="link + 'admin/books'" >
 				        		<i class="fa fa-book" aria-hidden="true"></i> Books
 				        	</a>
-							<a href="admin/book/create" class="btn btn-primary btn_add">
+							<a href="link + 'admin/book/create'" class="btn btn-primary btn_add">
   								<i class="fa fa-plus" aria-hidden="true"></i>
   							</a>
 			      		</div>
 						<div class="list-group-item">
-			      			<a href="/admin/customers" >
+			      			<a href="link + '/admin/customers'" >
 				        		<i class="fa fa-users" aria-hidden="true"></i> Customers
 				        	</a>
-							<a href="admin/customer/create" class="btn btn-primary btn_add">
+							<a href="link + 'admin/customer/create'" class="btn btn-primary btn_add">
   								<i class="fa fa-plus" aria-hidden="true"></i>
   							</a>
 			      		</div>
 			      		<div class="list-group-item">
-			      			<a href="admin/orders" >
+			      			<a href="link + 'admin/orders'" >
 				        		<i class="fa fa-shopping-cart" aria-hidden="true"></i> Orders
 				        	</a>
 			      		</div>
@@ -70,8 +70,14 @@
 <script>
 
 export default {
-  name: 'layout',
+	name: 'layout',
+	data() {
+		return {
+			link: ''
+		}
+	},
   created() {
+		this.link = this.$parent.$parent.BASE_URL
 		if (!localStorage['admin']) {
 			//location.href = '/admin/login';
 		}

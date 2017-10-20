@@ -49,7 +49,7 @@
 			              	self.error = response.data.message
 			            } else {
 			              	localStorage.setItem('admin', JSON.stringify(response.data.data));
-			              	location.href = '/admin';
+			              	location.href = self.$parent.BASE_URL + '/admin';
 			            }
 			          } else {
 			            	console.log(response.data.message)
@@ -61,7 +61,7 @@
   	},
   	created() {
   		if (localStorage["admin"]) {
-  			location.href="/admin"
+  			location.href= this.$parent.BASE_URL + "/admin"
   		}
   		
   	}
