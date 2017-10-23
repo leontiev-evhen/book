@@ -10,7 +10,7 @@
 					<p :class="{ 'control': true }"><input v-model="password" v-validate="'required'" :class="{'input form-control': true, 'is-danger': errors.has('password') }"type="password" name="password" placeholder="Password"></p>
 				</div>
 				<button type="submit" class="btn btn-primary">Submit</button>
-				<a class="register_link" href="register">Register</a>
+				<a class="register_link" href="link + '/register'">Register</a>
 			</form>
 		</div>
 		<div class="user_block" v-else>
@@ -32,7 +32,8 @@
 			email: '',
 			password: '',
 			error: '',
-			access: false
+			access: false,
+			link: this.$parent.$parent.BASE_URL
   		}
   	},
   	methods: {

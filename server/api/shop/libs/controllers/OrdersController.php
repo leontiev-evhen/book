@@ -1,8 +1,12 @@
 <?php
-namespace controllers;
+namespace libs\controllers;
+use libs\core\Controller;
+use libs\models\OrdersModel;
+use libs\models\StatusOrderModel;
+use libs\models\CustomersModel;
 use \Exception;
 
-class OrdersController extends \core\Controller
+class OrdersController extends Controller
 {
 	protected $model;
 	private $headers;
@@ -21,9 +25,9 @@ class OrdersController extends \core\Controller
 
     public function __construct ($params)
     {
-        $this->model = new \models\OrdersModel();
-        $this->status_model = new \models\StatusOrderModel();
-        $this->model_customer = new \models\CustomersModel();
+        $this->model = new OrdersModel();
+        $this->status_model = new StatusOrderModel();
+        $this->model_customer = new CustomersModel();
         $this->headers = getallheaders();
 
         if (!empty($params))

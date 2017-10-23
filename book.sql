@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Время создания: Окт 20 2017 г., 16:45
+-- Время создания: Окт 23 2017 г., 11:00
 -- Версия сервера: 10.1.25-MariaDB-
 -- Версия PHP: 7.0.22-0ubuntu0.17.04.1
 
@@ -54,6 +54,13 @@ CREATE TABLE `book2author` (
   `id_author` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `book2author`
+--
+
+INSERT INTO `book2author` (`id_book`, `id_author`) VALUES
+(2, 20);
+
 -- --------------------------------------------------------
 
 --
@@ -77,6 +84,16 @@ CREATE TABLE `book2order` (
   `count` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `book2order`
+--
+
+INSERT INTO `book2order` (`id_order`, `id_book`, `count`) VALUES
+(1, 2, 5),
+(2, 2, 5),
+(3, 2, 3),
+(4, 2, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -91,6 +108,17 @@ CREATE TABLE `books` (
   `discaunt` int(11) NOT NULL,
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `books`
+--
+
+INSERT INTO `books` (`id`, `name`, `description`, `price`, `discaunt`, `create_at`) VALUES
+(2, 'The Girl With No Name', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 100, -10, '2017-10-23 10:23:18'),
+(3, 'A Dark Lure', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 200, 10, '2017-10-23 10:24:06'),
+(4, 'The Baker\'s Secret: A Novel', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 300, 0, '2017-10-23 10:24:21'),
+(5, 'The Hideaway', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 400, 0, '2017-10-23 10:24:40'),
+(6, 'Sweet Tea Tuesdays', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 500, 0, '2017-10-23 10:24:53');
 
 --
 -- Триггеры `books`
@@ -134,6 +162,13 @@ CREATE TABLE `customers` (
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `customers`
+--
+
+INSERT INTO `customers` (`id`, `name`, `email`, `password`, `discaunt`, `token`, `token_create_at`, `status`, `id_role`, `create_at`) VALUES
+(1, 'yevhen', 'leo@mail.cz', '$2y$10$4oujZTCU.sng4rqAKMWeU.WiDaPPrWTCVBl.0BakT.knh9ziJYw2i', 0, 'ShdizgbtPSv2LsBcbBdbJPQq5i1ZvXLD', 1508747725, 1, 1, '2017-10-23 10:30:18');
+
 -- --------------------------------------------------------
 
 --
@@ -145,6 +180,17 @@ CREATE TABLE `genres` (
   `name` varchar(255) NOT NULL,
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `genres`
+--
+
+INSERT INTO `genres` (`id`, `name`, `create_at`) VALUES
+(2, 'History', '2017-10-23 09:52:08'),
+(3, 'Travel', '2017-10-23 09:52:23'),
+(4, 'Arts & Photography', '2017-10-23 09:52:37'),
+(5, 'Sports & Outdoors', '2017-10-23 09:53:02'),
+(6, 'Education & Teaching', '2017-10-23 09:53:18');
 
 -- --------------------------------------------------------
 
@@ -159,6 +205,17 @@ CREATE TABLE `history_book` (
   `price_book` int(11) NOT NULL,
   `discaunt_book` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `history_book`
+--
+
+INSERT INTO `history_book` (`id`, `id_book`, `name_book`, `price_book`, `discaunt_book`) VALUES
+(2, 2, 'The Girl With No Name', 100, 0),
+(3, 3, 'A Dark Lure', 200, 10),
+(4, 4, 'The Baker\'s Secret: A Novel', 300, 0),
+(5, 5, 'The Hideaway', 400, 0),
+(6, 6, 'Sweet Tea Tuesdays', 500, 0);
 
 -- --------------------------------------------------------
 
@@ -175,6 +232,16 @@ CREATE TABLE `orders` (
   `create_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `orders`
+--
+
+INSERT INTO `orders` (`id`, `sum`, `id_customer`, `id_status`, `id_payment`, `create_at`) VALUES
+(1, 500, 1, 4, 1, '2017-10-23 10:32:48'),
+(2, 500, 1, 1, 1, '2017-10-23 10:32:56'),
+(3, 300, 1, 1, 4, '2017-10-23 10:35:43'),
+(4, 220, 1, 1, 4, '2017-10-23 10:56:36');
+
 -- --------------------------------------------------------
 
 --
@@ -185,6 +252,16 @@ CREATE TABLE `payment_system` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `payment_system`
+--
+
+INSERT INTO `payment_system` (`id`, `name`) VALUES
+(1, 'PayPal'),
+(2, 'Google Checkout'),
+(3, 'Amazon Payments'),
+(4, 'Dwolla');
 
 -- --------------------------------------------------------
 
@@ -197,6 +274,14 @@ CREATE TABLE `roles` (
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`) VALUES
+(1, 'admin'),
+(2, 'user');
+
 -- --------------------------------------------------------
 
 --
@@ -207,6 +292,16 @@ CREATE TABLE `status_order` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `status_order`
+--
+
+INSERT INTO `status_order` (`id`, `name`) VALUES
+(1, 'Pending'),
+(2, 'Completed'),
+(3, 'Shipped'),
+(4, 'Refunded');
 
 --
 -- Индексы сохранённых таблиц
@@ -312,47 +407,47 @@ ALTER TABLE `authors`
 -- AUTO_INCREMENT для таблицы `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT для таблицы `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблицы `genres`
 --
 ALTER TABLE `genres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT для таблицы `history_book`
 --
 ALTER TABLE `history_book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT для таблицы `payment_system`
 --
 ALTER TABLE `payment_system`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT для таблицы `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT для таблицы `status_order`
 --
 ALTER TABLE `status_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --

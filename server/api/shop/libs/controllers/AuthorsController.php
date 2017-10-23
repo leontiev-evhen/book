@@ -1,8 +1,10 @@
 <?php
-namespace controllers;
+namespace libs\controllers;
+use libs\core\Controller;
+use libs\models\AuthorsModel;
 
 
-class AuthorsController extends \core\Controller
+class AuthorsController extends Controller
 {
 
     protected $model;
@@ -13,7 +15,7 @@ class AuthorsController extends \core\Controller
 
     public function __construct ($params)
     {
-        $this->model = new \models\AuthorsModel();
+        $this->model = new AuthorsModel();
         
         if ($params)
         {

@@ -24,6 +24,7 @@ export default {
   	},
  	methods: {
  		create: function() {
+ 			let self = this
 			this.$validator.validateAll().then((result) => {
 		        if (result) {
 					let config = {
@@ -41,7 +42,7 @@ export default {
 								if (!response.data.success) {
 									console.log(response.data.message)
 								} else {
-									//location.href = this.$parent.$parent.BASE_URL + '/admin/genres'
+									location.href = self.$parent.$parent.BASE_URL + '/admin/genres'
 								}
 							} else {
 								console.log(response.data.message)

@@ -1,8 +1,9 @@
 <?php
-namespace controllers;
+namespace libs\controllers;
+use libs\core\Controller;
+use libs\models\CustomersModel;
 
-
-class AuthController extends \core\Controller
+class AuthController extends Controller
 {
 
     protected $model;
@@ -20,7 +21,7 @@ class AuthController extends \core\Controller
 
     public function __construct ($params)
     {
-        $this->model = new \models\CustomersModel();
+        $this->model = new CustomersModel();
         $this->headers = getallheaders();
     }
 

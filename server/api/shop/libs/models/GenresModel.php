@@ -1,8 +1,9 @@
 <?php
-namespace models;
+namespace libs\models;
+use libs\core\Model;
 use \PDO;
 
-class GenresModel extends \core\Model
+class GenresModel extends Model
 {
     private $table = 'genres';
 

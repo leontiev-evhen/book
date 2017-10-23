@@ -1,5 +1,5 @@
 <?php
-namespace core;
+namespace libs\core;
 use \Exception;
 
 class Controller

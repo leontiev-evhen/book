@@ -1,8 +1,9 @@
 <?php
-namespace core;
+namespace libs\core;
+use libs\core\db\Sql;
 use \PDO;
 
-class Model extends \core\db\Sql
+class Model extends Sql
 {
     protected $connect;
     protected $date;

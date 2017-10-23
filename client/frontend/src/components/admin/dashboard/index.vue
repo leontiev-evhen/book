@@ -18,7 +18,7 @@
 	                    </div>
 	                </div>
 	            </div>
-	            <a href="/admin/authors">
+	            <a :href="link + '/admin/authors'">
 	                <div class="panel-footer">
 	                    <span class="pull-left">View Details</span>
 	                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -39,7 +39,7 @@
 	                    </div>
 	                </div>
 	            </div>
-	            <a href="/admin/genres">
+	            <a :href="link + '/admin/genres'">
 	                <div class="panel-footer">
 	                    <span class="pull-left">View Details</span>
 	                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -60,7 +60,7 @@
 	                    </div>
 	                </div>
 	            </div>
-	            <a href="/admin/books">
+	            <a :href="link + '/admin/books'">
 	                <div class="panel-footer">
 	                    <span class="pull-left">View Details</span>
 	                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -81,7 +81,7 @@
 	                    </div>
 	                </div>
 	            </div>
-	            <a href="/admin/customers">
+	            <a :href="link + '/admin/customers'">
 	                <div class="panel-footer">
 	                    <span class="pull-left">View Details</span>
 	                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -102,7 +102,7 @@
 	                    </div>
 	                </div>
 	            </div>
-	            <a href="/admin/orders">
+	            <a :href="link + '/admin/orders'">
 	                <div class="panel-footer">
 	                    <span class="pull-left">View Details</span>
 	                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -114,3 +114,14 @@
 	</div>
 	</div>
 </template>
+
+<script>
+export default {
+	name: 'dashboard',
+	data() {
+		return {
+			link: this.$parent.$parent.BASE_URL
+		}
+	}
+}
+</script>

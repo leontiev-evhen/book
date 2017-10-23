@@ -9,16 +9,16 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="">Home
+              <a class="nav-link" :href="link">Home
                 <span class="sr-only">(current)</span>
 				<i class="fa fa-home" aria-hidden="true"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about">About <i class="fa fa-info-circle" aria-hidden="true"></i></a>
+              <a class="nav-link" :href="link + '/about'">About <i class="fa fa-info-circle" aria-hidden="true"></i></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="cart">Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+              <a class="nav-link" :href="link + '/cart'">Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
             </li>
           </ul>
 		      <auth-form @login="login" @logout="logout"></auth-form>
@@ -32,6 +32,11 @@
 import AuthForm from './AuthForm.vue'
 export default {
   name: 'TopMenu',
+  data() {
+      return {
+        link: this.$parent.$parent.BASE_URL
+      }
+  },
   components: {
 	   AuthForm
   },

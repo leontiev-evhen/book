@@ -18,7 +18,7 @@
 				        	</a>
 			      		</div>
 			      		<div class="list-group-item">
-			      			<a :href="link + 'admin/authors'" >
+			      			<a :href="link + '/admin/authors'" >
 				        		<i class="fa fa-pencil" aria-hidden="true"></i> Authors
 				        	</a>
 							<a :href="link + '/admin/author/create'" class="btn btn-primary btn_add">
@@ -26,7 +26,7 @@
   							</a>
 			      		</div>
 			        	<div class="list-group-item">
-			      			<a :href="link + 'admin/genres'" >
+			      			<a :href="link + '/admin/genres'" >
 				        		<i class="fa fa-leaf" aria-hidden="true"></i> Genres
 				        	</a>
 							<a :href="link + '/admin/genre/create'" class="btn btn-primary btn_add">
@@ -34,10 +34,10 @@
   							</a>
 			      		</div>
 						<div class="list-group-item">
-			      			<a :href="link + 'admin/books'" >
+			      			<a :href="link + '/admin/books'" >
 				        		<i class="fa fa-book" aria-hidden="true"></i> Books
 				        	</a>
-							<a :href="link + 'admin/book/create'" class="btn btn-primary btn_add">
+							<a :href="link + '/admin/book/create'" class="btn btn-primary btn_add">
   								<i class="fa fa-plus" aria-hidden="true"></i>
   							</a>
 			      		</div>
@@ -45,12 +45,12 @@
 			      			<a :href="link + '/admin/customers'" >
 				        		<i class="fa fa-users" aria-hidden="true"></i> Customers
 				        	</a>
-							<a :href="link + 'admin/customer/create'" class="btn btn-primary btn_add">
+							<a :href="link + '/admin/customer/create'" class="btn btn-primary btn_add">
   								<i class="fa fa-plus" aria-hidden="true"></i>
   							</a>
 			      		</div>
 			      		<div class="list-group-item">
-			      			<a :href="link + 'admin/orders'" >
+			      			<a :href="link + '/admin/orders'" >
 				        		<i class="fa fa-shopping-cart" aria-hidden="true"></i> Orders
 				        	</a>
 			      		</div>
@@ -73,19 +73,18 @@ export default {
 	name: 'layout',
 	data() {
 		return {
-			link: ''
+			link: this.$parent.BASE_URL
 		}
 	},
   created() {
-		this.link = this.$parent.$parent.BASE_URL
 		if (!localStorage['admin']) {
-			//location.href = '/admin/login';
+			location.href = this.link + '/admin/login';
 		}
   },
   methods: {
   		logout: function() {
   			localStorage.clear();
-  			location.href = '/admin/login';
+  			location.href = this.link + '/admin/login';
   		}
   }
 }

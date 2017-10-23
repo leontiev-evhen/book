@@ -11,8 +11,9 @@ export default {
   data() {
     return {
       AJAX_URL: 'http://192.168.0.15/~user11',
-      //AJAX_URL: 'http://courses.site',
+      //AJAX_URL: 'http://bookshop.site/~user11',
       BASE_URL: 'http://192.168.0.15/~user11/book',
+      //BASE_URL: 'http://bookshop.site/~user11/book',
       user: null
     }
   },
@@ -22,7 +23,7 @@ export default {
     },
     logout: function() {
         delete localStorage["profile"]
-        location.href = '/';
+        location.href = this.BASE_URL;
     }
   },
   created() {

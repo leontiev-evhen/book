@@ -1,8 +1,10 @@
 <?php
-namespace controllers;
+namespace libs\controllers;
+use libs\core\Controller;
+use libs\models\GenresModel;
 
 
-class GenresController extends \core\Controller
+class GenresController extends Controller
 {
 
     protected $model;
@@ -13,7 +15,7 @@ class GenresController extends \core\Controller
 
     public function __construct ($params)
     {
-        $this->model = new \models\GenresModel();
+        $this->model = new GenresModel();
         
         if ($params)
         {

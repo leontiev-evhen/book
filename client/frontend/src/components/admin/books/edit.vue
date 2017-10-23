@@ -19,7 +19,7 @@
 					</div>
 					<div class="form-group">
 					    <label for="text">Discaunt:</label>
-					    <input type="text" class="form-control" v-default-value="book.discaunt" v-model="discaunt">
+					    <p :class="{ 'control': true }"><input v-model="discaunt" v-validate="'numeric'" :class="{'input form-control': true, 'is-danger': errors.has('discaunt') } "type="text" name="discaunt" v-default-value="book.discaunt"></p>
 					</div>
 					<button type="submit" class="btn btn-primary">Edit</button>
 				</form>
@@ -133,7 +133,7 @@ export default {
     	},
 
  		edit: function() {
-			
+			let self = this
 			this.axios.put(this.$parent.$parent.AJAX_URL + '/book/client/api/books/' + this.$route.params.id, {
 					name: (this.name) ? this.name : this.book.name,
 					description: (this.description) ? this.description : this.book.description,
@@ -146,7 +146,7 @@ export default {
 						if (!response.data.success) {
 							console.log(response.data.message)
 						} else {
-							//location.href = this.$parent.$parent.BASE_URL + '/admin/books'
+							location.href = self.$parent.$parent.BASE_URL + '/admin/books'
 						}
 					} else {
 						console.log(response.data.message)

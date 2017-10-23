@@ -1,4 +1,7 @@
 <?php
+namespace libs;
+use libs\helpers\ConverterHelper;
+use Exception;
 
 class RestServer
 {
@@ -12,7 +15,7 @@ class RestServer
         list($t, $s, $a, $d, $db, $class, $params) = array_pad(explode('/', $url, 7), 7, null);
 
 
-        $className = 'controllers\\'.ucfirst($class).'Controller';
+        $className = 'libs\\controllers\\'.ucfirst($class).'Controller';
 
         if (class_exists($className))
         {
@@ -54,7 +57,7 @@ class RestServer
        
             $data = call_user_func([$class, $method]);
             
-            \helpers\ConverterHelper::chooseTypeOutput($data, self::$type);
+            ConverterHelper::chooseTypeOutput($data, self::$type);
         }
     }
 }

@@ -1,11 +1,11 @@
 <?php
-namespace models;
+namespace libs\models;
+use libs\core\Model;
 use \PDO;
 
-class PaymentSystemModel extends \core\Model
+class PaymentSystemModel extends Model
 {
     private $table = 'payment_system';
-
     public function getAll ()
     {
         $sql = $this->select([

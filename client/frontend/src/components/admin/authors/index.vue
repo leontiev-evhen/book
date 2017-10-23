@@ -43,7 +43,7 @@ export default {
 		return {
       		authors: '',
 			error: '',
-			link: ''
+			link: this.$parent.$parent.BASE_URL
 		}
   	},
  	methods: {
@@ -66,7 +66,7 @@ export default {
  		}
   	},
     created() {
-	this.link = this.$parent.$parent.BASE_URL
+	
     this.axios.get(this.$parent.$parent.AJAX_URL + '/book/client/api/authors').then((response) => {
 
         if (response.status == 200) {

@@ -25,7 +25,7 @@ export default {
   	},
  	methods: {
  		edit: function() {
-			
+			let self = this
 			let config = {
 				headers: {
 					'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -41,7 +41,7 @@ export default {
 						if (!response.data.success) {
 							console.log(response.data.message)
 						} else {
-							//location.href = this.$parent.$parent.BASE_URL + '/admin/genres'
+							location.href = self.$parent.$parent.BASE_URL + '/admin/genres'
 						}
 					} else {
 						console.log(response.data.message)

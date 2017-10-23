@@ -72,7 +72,7 @@ export default {
 								if (!response.data.success) {
 									self.error = response.data.message
 								} else {
-									//location.href = this.$parent.$parent.BASE_URL + '/admin/customers'
+									location.href = self.$parent.$parent.BASE_URL + '/admin/customers'
 								}
 							} else {
 								console.log(response.data.message)

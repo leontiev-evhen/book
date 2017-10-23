@@ -1,5 +1,5 @@
 <?php 
-namespace core\db;
+namespace libs\core\db;
 
 class Sql
 {

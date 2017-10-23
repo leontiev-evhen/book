@@ -1,5 +1,5 @@
 <?php
-namespace helpers;
+namespace libs\helpers;
 use \SimpleXMLElement;
 
 class ConverterHelper

@@ -18,7 +18,8 @@
 			</div>
 			<div class="form-group">
 			    <label for="text">Discaunt:</label>
-			    <input type="text" class="form-control" v-model="discaunt">
+			    <p :class="{ 'control': true }"><input v-model="discaunt" v-validate="'numeric'" :class="{'input form-control': true, 'is-danger': errors.has('discaunt') }"type="text" name="discaunt"></p>
+				<span v-show="errors.has('discaunt')" class="help is-danger">{{ errors.first('discaunt') }}</span>
 			</div>
 			
 			<button type="submit" class="btn btn-primary">Create</button>
@@ -41,6 +42,7 @@ export default {
   	},
  	methods: {
  		create: function() {
+ 			let self = this
 			this.$validator.validateAll().then((result) => {
 		        if (result) {
 					let config = {
@@ -61,7 +63,7 @@ export default {
 								if (!response.data.success) {
 									console.log(response.data.message)
 								} else {
-									//location.href = this.$parent.$parent.BASE_URL + '/admin/books'
+									location.href = self.$parent.$parent.BASE_URL + '/admin/books'
 								}
 							} else {
 								console.log(response.data.message)

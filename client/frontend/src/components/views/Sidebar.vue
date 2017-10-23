@@ -2,11 +2,11 @@
   <div class="home">
    		<h3 class="my-4">Authors</h3>
       	<div class="list-group">
-        	<a :href="'authors/' + author.id" v-for="author in authors" class="list-group-item">{{author.name}}</a>
+        	<a :href="link + '/authors/' + author.id" v-for="author in authors" class="list-group-item">{{author.name}}</a>
       	</div>
       	<h3 class="my-4">Genres</h3>
       	<div class="list-group">
-        	<a :href="'genres/' + genre.id" v-for="genre in genres" class="list-group-item">{{genre.name}}</a>
+        	<a :href="link + '/genres/' + genre.id" v-for="genre in genres" class="list-group-item">{{genre.name}}</a>
       	</div>
         </div>
         <!-- /.col-lg-3 -->
@@ -21,7 +21,8 @@ export default {
   data () {
     return {
       authors: '',
-      genres: ''
+      genres: '',
+      link: this.$parent.$parent.BASE_URL
     }
   },
   created() { 

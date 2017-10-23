@@ -1,8 +1,11 @@
 <?php
-namespace controllers;
+namespace libs\controllers;
+use libs\core\Controller;
+use libs\models\CartModel;
+use libs\models\CustomersModel;
+use libs\models\PaymentSystemModel;
 
-
-class CartController extends \core\Controller
+class CartController extends Controller
 {
 
     protected $model;
@@ -15,9 +18,9 @@ class CartController extends \core\Controller
 
     public function __construct ($params)
     {
-        $this->model = new \models\CartModel();
-        $this->model_customer = new \models\CustomersModel();
-		$this->model_payment = new \models\PaymentSystemModel();
+        $this->model = new CartModel();
+        $this->model_customer = new CustomersModel();
+		$this->model_payment = new PaymentSystemModel();
 		$this->headers = getallheaders();
 
         if ($params)

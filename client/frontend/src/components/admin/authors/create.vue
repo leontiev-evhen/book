@@ -19,7 +19,8 @@ export default {
   	name: 'author',
  	 data() {
 		return {
-      		name: ''
+      		name: '',
+      		link: this.$parent.$parent.BASE_URL
 		}
   	},
  	methods: {

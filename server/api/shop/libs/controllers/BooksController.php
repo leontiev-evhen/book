@@ -1,8 +1,9 @@
 <?php
-namespace controllers;
+namespace libs\controllers;
+use libs\core\Controller;
+use libs\models\BooksModel;
 
-
-class BooksController extends \core\Controller
+class BooksController extends Controller
 {
 
     protected $model;
@@ -19,7 +20,7 @@ class BooksController extends \core\Controller
 
     public function __construct ($params)
     {
-        $this->model = new \models\BooksModel();
+        $this->model = new BooksModel();
         
         if ($params)
         {

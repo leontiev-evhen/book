@@ -16,7 +16,7 @@
 				<tbody>
 					<tr v-for="(book, key) in books">
 					  	<td>{{key+1}}</td>
-					  	<td><a :href="'book/' + book.id">{{book.name}}</a></td>
+					  	<td><a :href="link + '/book/' + book.id">{{book.name}}</a></td>
 					  	<td>
 							<button @click="changeCount(key, 0)" class="btn btn-default btn-cart mt-20">-</button>
 							<span class="count">{{book.count}}</span>
@@ -76,7 +76,8 @@ data () {
     	payment_systems: '',
     	payment: '',
     	discaunt: 0,
-    	total: ''
+    	total: '',
+    	link: this.$parent.$parent.BASE_URL
     }
 },
 created() {
@@ -157,7 +158,7 @@ methods: {
 					
 				          if (response.status == 200) {
 				            if (response.data.status) {
-				            	//location.href = self.$parent.$parent.BASE_URL + '/success'
+				            	location.href = self.$parent.$parent.BASE_URL + '/success'
 				            } else {
 				              console.log(response.data.message)
 				            }

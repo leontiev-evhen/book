@@ -1,8 +1,9 @@
 <?php
-namespace models;
+namespace libs\models;
+use libs\core\Model;
 use \PDO;
 
-class AuthorsModel extends \core\Model
+class AuthorsModel extends Model
 {
     private $table = 'authors';
 
