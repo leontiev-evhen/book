@@ -19,7 +19,7 @@
 	            <div class="row" v-for="(order, key) in orders">
 	                <div class="cell">{{key+1}}</div>
 	                <div class="cell">
-	                	<a :href="'/admin/customer/edit/' + order.id_customer">{{order.CUSTOMER_NAME}}</a>
+	                	<a :href="link + '/admin/customer/edit/' + order.id_customer">{{order.CUSTOMER_NAME}}</a>
 	                </div>
 	                <div class="cell">
 	                	{{order.create_at}}
