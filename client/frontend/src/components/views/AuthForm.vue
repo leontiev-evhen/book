@@ -33,7 +33,7 @@
 			password: '',
 			error: '',
 			access: false,
-			link: this.$parent.$parent.BASE_URL
+			link: this.$parent.$parent.$parent.BASE_URL
   		}
   	},
   	methods: {
