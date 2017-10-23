@@ -158,7 +158,7 @@ class GenresModelTest extends TestCase
     public function additionDeleteProvider ()
     {
         return [
-            'data'                  => [['id' => 24]],
+            'data'                  => [['id' => 200]],
             'data_negative_number'  => [['id' => -1]],
             'data_string'           => [['id' => 'test']],
             'data_array'            => [['id' => []]],

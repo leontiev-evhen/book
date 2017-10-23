@@ -14,7 +14,7 @@ class Model extends Sql
         {
             throw new Exception('Could not connect');
         }
-
+        date_default_timezone_set('Europe/Kiev');
         $date = date("Y-m-d H:i:s");
         //$this->date = strtotime($date);
         $this->date = $date;
