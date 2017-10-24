@@ -192,5 +192,10 @@ export default new Router({
       name: 'PageNotFound ',
       component: PageNotFound 
     },
+    {
+      path: '/~user11/book/404',
+      name: 'PageNotFound ',
+      component: PageNotFound 
+    },
   ]
 })

@@ -20,11 +20,11 @@
             </div>
         </div>
     </div>
+  
 </template>
 
 
 <script>
-
 export default {
   name: 'category',
   data () {
@@ -35,17 +35,21 @@ export default {
     }
   },
   created() {
+    let self = this
   	this.axios.get(this.$parent.$parent.AJAX_URL + '/book/client/api/' + this.$route.params.category + '/' + this.$route.params.id).then((response) => {
 
           if (response.status == 200) {
             if (response.data.success) {
               this.category = response.data.data
             } else {
-				console.log(response.data.message)
+				      console.log(response.data.message)
             }
           } else {
             console.log(response.data.message)
           }
+    })
+    .catch(e => {
+        location.href = self.$parent.$parent.BASE_URL + '/404'
     })
 
     this.axios.get(this.$parent.$parent.AJAX_URL + '/book/client/api/books/all/' + this.$route.params.category.slice(0, -1) + '/' + this.$route.params.id).then((response) => {
