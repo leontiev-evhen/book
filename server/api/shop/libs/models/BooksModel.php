@@ -46,39 +46,42 @@ class BooksModel extends Model
             $data = $STH->fetch(PDO::FETCH_ASSOC);
         }  
 
-
-        $sql = $this->select([
+        if (!empty($data))
+        {
+            $sql = $this->select([
                 'id',
                 'name'])
             ->from('authors')
             ->join('left', 'book2author ON book2author.id_author = authors.id')
             ->where(['id_book' => "<:id>"])
              ->execute();
-        $sql = str_replace(["'<", ">'"], '', $sql);
+            $sql = str_replace(["'<", ">'"], '', $sql);
 
-        $STH = $this->connect->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-        if ($STH->execute([':id' => $id]))
-        {
-            $data['authors'] = $STH->fetchAll();
+            $STH = $this->connect->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+            if ($STH->execute([':id' => $id]))
+            {
+                $data['authors'] = $STH->fetchAll();
+            }
+
+            $sql = $this->select([
+                    'id',
+                    'name'])
+                ->from('genres')
+                ->join('left', 'book2genre ON book2genre.id_genre = genres.id')
+                ->where(['id_book' => "<:id>"])
+                 ->execute();
+            $sql = str_replace(["'<", ">'"], '', $sql);
+
+            $STH = $this->connect->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+            if ($STH->execute([':id' => $id]))
+            {
+                $data['genres'] = $STH->fetchAll();
+            }
+
+            return $data;
         }
-
-        $sql = $this->select([
-                'id',
-                'name'])
-            ->from('genres')
-            ->join('left', 'book2genre ON book2genre.id_genre = genres.id')
-            ->where(['id_book' => "<:id>"])
-             ->execute();
-        $sql = str_replace(["'<", ">'"], '', $sql);
-
-        $STH = $this->connect->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-        if ($STH->execute([':id' => $id]))
-        {
-            $data['genres'] = $STH->fetchAll();
-        }
-
-        return $data;
-
+        return false;
+        
     }
 
     public function createBook ($data)
@@ -170,10 +173,11 @@ class BooksModel extends Model
 
         $STH->bindParam(1, $id);
         $STH->execute();
+
         if (!empty($data->ids))
         {
-
             foreach ($data->ids as $value) {
+
                 $sql = $this->insert()
                     ->from('book2'.$relation)
                     ->values([
@@ -181,18 +185,17 @@ class BooksModel extends Model
                         'id_'.$relation  => '<?>'])
                     ->execute();
                 $sql = str_replace(["'<", ">'"], '', $sql);
-                
+               
                 $STH = $this->connect->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-                $STH->bindParam(1, $id);
-                $STH->bindParam(2, $value->id);
-
+                $STH->bindParam(1, $id, PDO::PARAM_INT);
+                $STH->bindParam(2, $value->id, PDO::PARAM_INT);
+             
                 if ($STH->execute())
                 {
                     $res = true;
                 }
             }
-
         } 
         else
         {
@@ -222,6 +225,7 @@ class BooksModel extends Model
         {
             return $STH->fetchAll();
         }
+        return false;
     }
 
 }

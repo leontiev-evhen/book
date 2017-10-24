@@ -9,13 +9,16 @@ class GenresModelTest extends TestCase
 {
     use TestCaseTrait;
 
-	private $pdo;
+	private $_conn = null;
     static $model;
 
     public function getConnection()
     {
-        $this->pdo = new \PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
-        return $this->createDefaultDBConnection($this->pdo, $GLOBALS['DB_DBNAME']);
+        if ($this->_conn === null) {
+            $pdo = new \PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
+            $this->_conn = $this->createDefaultDBConnection($pdo, $GLOBALS['DB_DBNAME']);
+        }
+        return $this->_conn;
     }
 
     public function getDataSet()
